@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Video;
+use App\Models\Playlist;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class VideoController extends Controller
 {
@@ -14,7 +16,7 @@ class VideoController extends Controller
      */
     public function index(): View
     {
-        $videos = Video::latest()->get();
+        $videos = Video::with(['playlist', 'user'])->latest()->get();
 
         return view('videos.index', compact('videos'));
     }
@@ -24,7 +26,8 @@ class VideoController extends Controller
      */
     public function create(): View
     {
-        return view('videos.create');
+        $playlists = Playlist::where('user_id', Auth::id())->get();
+        return view('videos.create', compact('playlists'));
     }
 
     /**
@@ -33,16 +36,31 @@ class VideoController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
+            'playlist_id' => 'required|exists:playlists,id',
+            'youtube_id' => 'required|string|max:20',
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'url' => 'required|url',
-            'duration' => 'nullable|integer|min:1',
-            'thumbnail_url' => 'nullable|url',
         ]);
+
+        // Check if the playlist belongs to the user
+        $playlist = Playlist::findOrFail($validated['playlist_id']);
+        if ($playlist->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $validated['user_id'] = Auth::id();
+
+        // Check if video already exists in this playlist
+        $existingVideo = Video::where('playlist_id', $validated['playlist_id'])
+            ->where('youtube_id', $validated['youtube_id'])
+            ->first();
+
+        if ($existingVideo) {
+            return back()->with('error', 'This video is already in the playlist.');
+        }
 
         $video = Video::create($validated);
 
-        return redirect()->route('videos.show', $video)
+        return redirect()->route('playlists.show', $playlist)
             ->with('success', 'Video added successfully.');
     }
 
@@ -51,6 +69,7 @@ class VideoController extends Controller
      */
     public function show(Video $video): View
     {
+        $video->load(['playlist', 'user']);
         return view('videos.show', compact('video'));
     }
 
@@ -59,7 +78,13 @@ class VideoController extends Controller
      */
     public function edit(Video $video): View
     {
-        return view('videos.edit', compact('video'));
+        // Only allow owner to edit
+        if ($video->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $playlists = Playlist::where('user_id', Auth::id())->get();
+        return view('videos.edit', compact('video', 'playlists'));
     }
 
     /**
@@ -67,13 +92,21 @@ class VideoController extends Controller
      */
     public function update(Request $request, Video $video): RedirectResponse
     {
+        // Only allow owner to update
+        if ($video->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $validated = $request->validate([
+            'playlist_id' => 'required|exists:playlists,id',
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'url' => 'required|url',
-            'duration' => 'nullable|integer|min:1',
-            'thumbnail_url' => 'nullable|url',
         ]);
+
+        // Check if the new playlist belongs to the user
+        $playlist = Playlist::findOrFail($validated['playlist_id']);
+        if ($playlist->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
 
         $video->update($validated);
 
@@ -86,9 +119,15 @@ class VideoController extends Controller
      */
     public function destroy(Video $video): RedirectResponse
     {
+        // Only allow owner to delete
+        if ($video->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $playlist = $video->playlist;
         $video->delete();
 
-        return redirect()->route('videos.index')
-            ->with('success', 'Video deleted successfully.');
+        return redirect()->route('playlists.show', $playlist)
+            ->with('success', 'Video removed from playlist.');
     }
 }

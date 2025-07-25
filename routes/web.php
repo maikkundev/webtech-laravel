@@ -17,6 +17,10 @@ Route::middleware(['auth'])->group(function () {
 
     // Playlist Routes (Protected)
     Route::resource('playlists', PlaylistController::class);
+    Route::get('/playlists/{playlist}/add-video', [PlaylistController::class, 'addVideo'])->name('playlists.add-video');
+    Route::post('/playlists/{playlist}/videos', [PlaylistController::class, 'storeVideo'])->name('playlists.store-video');
+    Route::get('/playlists/{playlist}/play', [PlaylistController::class, 'play'])->name('playlists.play');
+    Route::get('/search/videos', [PlaylistController::class, 'searchVideos'])->name('search.videos');
 
     // Video Routes (Protected)
     Route::resource('videos', VideoController::class);

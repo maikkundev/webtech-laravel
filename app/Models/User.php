@@ -66,18 +66,18 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the name of the unique identifier for the user.
-     */
-    public function getAuthIdentifierName(): string
-    {
-        return 'username';
-    }
-
-    /**
      * Get the full name of the user.
      */
     public function getFullNameAttribute(): string
     {
         return $this->firstname . ' ' . $this->lastname;
+    }
+
+    /**
+     * Find the user instance for the given username.
+     */
+    public function findForPassport($username)
+    {
+        return $this->where('username', $username)->first();
     }
 }
