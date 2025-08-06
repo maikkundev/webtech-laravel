@@ -20,7 +20,7 @@ class YouTubeService
     public function searchVideos($query, $maxResults = 10)
     {
         if (!$this->apiKey) {
-            return $this->getMockSearchResults($query, $maxResults);
+            return Log::error("Youtube API key not found");
         }
 
         try {
@@ -36,7 +36,7 @@ class YouTubeService
             if ($response->successful()) {
                 $data = $response->json();
                 $videos = [];
-                
+
                 foreach ($data['items'] as $item) {
                     $videos[] = [
                         'id' => $item['id']['videoId'],
@@ -47,16 +47,13 @@ class YouTubeService
                         'publishedAt' => $item['snippet']['publishedAt']
                     ];
                 }
-                
+
                 return $videos;
             }
         } catch (\Exception $e) {
             // Log error if needed
             Log::warning('YouTube API search failed: ' . $e->getMessage());
         }
-
-        // Fallback to mock data
-        return $this->getMockSearchResults($query, $maxResults);
     }
 
     /**
@@ -65,7 +62,7 @@ class YouTubeService
     public function getVideoDetails($videoId)
     {
         if (!$this->apiKey) {
-            return $this->getMockVideoDetails($videoId);
+            return Log::error("Youtube API key not found");
         }
 
         try {
@@ -77,7 +74,7 @@ class YouTubeService
 
             if ($response->successful()) {
                 $data = $response->json();
-                
+
                 if (empty($data['items'])) {
                     return null;
                 }
@@ -96,8 +93,6 @@ class YouTubeService
         } catch (\Exception $e) {
             Log::warning('YouTube API video details failed: ' . $e->getMessage());
         }
-
-        return $this->getMockVideoDetails($videoId);
     }
 
     /**
@@ -108,83 +103,5 @@ class YouTubeService
         $pattern = '/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/';
         preg_match($pattern, $url, $matches);
         return isset($matches[1]) ? $matches[1] : null;
-    }
-
-    /**
-     * Mock search results for development
-     */
-    private function getMockSearchResults($query, $maxResults)
-    {
-        $mockVideos = [
-            [
-                'id' => 'dQw4w9WgXcQ',
-                'title' => 'Rick Astley - Never Gonna Give You Up (Official Video)',
-                'description' => 'The official video for "Never Gonna Give You Up" by Rick Astley',
-                'thumbnail' => 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
-                'channel' => 'Rick Astley',
-                'publishedAt' => '2009-10-25T06:57:33Z'
-            ],
-            [
-                'id' => 'ZbZSe6N_BXs',
-                'title' => 'PHP Tutorial for Beginners - ' . $query,
-                'description' => 'Learn PHP programming from scratch',
-                'thumbnail' => 'https://img.youtube.com/vi/ZbZSe6N_BXs/hqdefault.jpg',
-                'channel' => 'Programming Channel',
-                'publishedAt' => '2020-01-15T10:30:00Z'
-            ],
-            [
-                'id' => 'J7DFmxVe0Ps',
-                'title' => 'Laravel Tutorial - Build a Web Application with ' . $query,
-                'description' => 'Complete Laravel tutorial for building web applications',
-                'thumbnail' => 'https://img.youtube.com/vi/J7DFmxVe0Ps/hqdefault.jpg',
-                'channel' => 'Laravel Channel',
-                'publishedAt' => '2021-03-20T14:45:00Z'
-            ],
-            [
-                'id' => 'kbBgx0BEuuI',
-                'title' => 'JavaScript Fundamentals - ' . $query,
-                'description' => 'Learn JavaScript programming fundamentals',
-                'thumbnail' => 'https://img.youtube.com/vi/kbBgx0BEuuI/hqdefault.jpg',
-                'channel' => 'JS Academy',
-                'publishedAt' => '2022-05-10T09:15:00Z'
-            ],
-            [
-                'id' => 'SccSCuHhOw0',
-                'title' => 'Web Development Tutorial - ' . $query,
-                'description' => 'Complete web development course',
-                'thumbnail' => 'https://img.youtube.com/vi/SccSCuHhOw0/hqdefault.jpg',
-                'channel' => 'WebDev Pro',
-                'publishedAt' => '2023-02-28T16:20:00Z'
-            ]
-        ];
-
-        // Filter mock results based on query (simple contains check)
-        $filtered = array_filter($mockVideos, function($video) use ($query) {
-            return stripos($video['title'], $query) !== false || 
-                   stripos($video['description'], $query) !== false;
-        });
-
-        // If no matches, return all mock videos
-        if (empty($filtered)) {
-            $filtered = $mockVideos;
-        }
-
-        return array_slice(array_values($filtered), 0, $maxResults);
-    }
-
-    /**
-     * Mock video details for development
-     */
-    private function getMockVideoDetails($videoId)
-    {
-        return [
-            'id' => $videoId,
-            'title' => 'Sample Video Title',
-            'description' => 'Sample video description',
-            'thumbnail' => "https://img.youtube.com/vi/{$videoId}/hqdefault.jpg",
-            'channel' => 'Sample Channel',
-            'duration' => 'PT3M45S',
-            'publishedAt' => '2023-01-01T12:00:00Z'
-        ];
     }
 }

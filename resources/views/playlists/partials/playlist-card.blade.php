@@ -1,67 +1,74 @@
-<div class="bg-white dark:bg-[#161615] rounded-lg border border-[#e3e3e0] dark:border-[#3E3E3A] overflow-hidden hover:shadow-lg transition duration-300">
+<div class="card h-100 border shadow-sm" style="background-color: white; border-color: #e3e3e0;">
     <!-- Playlist Thumbnail -->
-    <div class="relative h-48 bg-gradient-to-br from-[#F53003] to-[#d42a00]">
+    <div class="position-relative" style="height: 200px; background: linear-gradient(135deg, #F53003, #d42a00);">
         @if($playlist->videos->count() > 0)
-            <img src="{{ $playlist->videos->first()->thumbnail_url }}" 
-                 alt="{{ $playlist->title }}" 
-                 class="w-full h-full object-cover">
+            <img src="{{ $playlist->videos->first()->thumbnail_url }}"
+                 alt="{{ $playlist->title }}"
+                 class="w-100 h-100" style="object-fit: cover;">
         @endif
-        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-            <div class="text-center text-white">
-                <svg class="w-12 h-12 mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24">
+        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center text-white" 
+             style="background-color: rgba(0,0,0,0.4);">
+            <div class="text-center">
+                <svg width="48" height="48" fill="currentColor" viewBox="0 0 24 24" class="mb-2">
                     <path d="M8 5v14l11-7z"/>
                 </svg>
-                <span class="text-sm font-medium">{{ $playlist->videos_count ?? 0 }} videos</span>
+                <span class="small fw-medium">{{ $playlist->videos_count ?? 0 }} videos</span>
             </div>
         </div>
         @if($playlist->is_public)
-            <div class="absolute top-3 right-3">
-                <span class="bg-green-500 text-white text-xs px-2 py-1 rounded-full">Public</span>
+            <div class="position-absolute top-0 end-0 m-3">
+                <span class="badge bg-success">Public</span>
             </div>
         @else
-            <div class="absolute top-3 right-3">
-                <span class="bg-gray-500 text-white text-xs px-2 py-1 rounded-full">Private</span>
+            <div class="position-absolute top-0 end-0 m-3">
+                <span class="badge bg-secondary">Private</span>
             </div>
         @endif
     </div>
 
-    <div class="p-6">
-        <div class="mb-4">
-            <h3 class="text-xl font-semibold text-[#1b1b18] dark:text-[#EDEDEC] mb-2">
+    <div class="card-body">
+        <div class="mb-3">
+            <h3 class="h5 fw-semibold mb-2" style="color: #1b1b18;">
                 {{ $playlist->title }}
             </h3>
-            
+
             @if($showOwner)
-                <p class="text-sm text-[#706f6c] dark:text-[#A1A09A] mb-2">
+                <p class="small text-muted mb-2">
                     by {{ $playlist->user->firstname }} {{ $playlist->user->lastname }}
                 </p>
             @endif
 
             @if($playlist->description)
-                <p class="text-[#706f6c] dark:text-[#A1A09A] text-sm line-clamp-2">
+                <p class="text-muted small text-truncate" style="max-height: 2.4em; overflow: hidden;">
                     {{ $playlist->description }}
                 </p>
             @endif
         </div>
 
-        <div class="flex items-center justify-between text-sm">
-            <div class="text-[#706f6c] dark:text-[#A1A09A]">
+        <div class="d-flex align-items-center justify-content-between small">
+            <div class="text-muted">
                 {{ $playlist->created_at->diffForHumans() }}
             </div>
-            <div class="flex space-x-3">
-                <a href="{{ route('playlists.show', $playlist) }}" 
-                   class="text-[#F53003] hover:text-[#d42a00] font-medium">
+            <div class="d-flex gap-3">
+                <a href="{{ route('playlists.show', $playlist) }}"
+                   class="text-decoration-none fw-medium"
+                   style="color: #F53003;"
+                   onmouseover="this.style.color='#d42a00'"
+                   onmouseout="this.style.color='#F53003'">
                     View
                 </a>
                 @if($playlist->videos_count > 0)
-                    <a href="{{ route('playlists.play', $playlist) }}" 
-                       class="text-[#F53003] hover:text-[#d42a00] font-medium">
+                    <a href="{{ route('playlists.play', $playlist) }}"
+                       class="text-decoration-none fw-medium"
+                       style="color: #F53003;"
+                       onmouseover="this.style.color='#d42a00'"
+                       onmouseout="this.style.color='#F53003'">
                         Play
                     </a>
                 @endif
                 @if(!$showOwner)
-                    <a href="{{ route('playlists.edit', $playlist) }}" 
-                       class="text-[#706f6c] hover:text-[#1b1b18] dark:hover:text-[#EDEDEC] font-medium">
+                    <a href="{{ route('playlists.edit', $playlist) }}"
+                       class="text-decoration-none fw-medium text-muted">
                         Edit
                     </a>
                 @endif

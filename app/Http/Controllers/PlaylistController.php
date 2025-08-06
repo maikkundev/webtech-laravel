@@ -28,7 +28,7 @@ class PlaylistController extends Controller
     public function index(Request $request): View
     {
         $user = Auth::user();
-        
+
         // Get user's own playlists
         $userPlaylists = Playlist::where('user_id', $user->id)
             ->withCount('videos')
@@ -86,7 +86,7 @@ class PlaylistController extends Controller
             abort(403, 'This playlist is private.');
         }
 
-        $playlist->load(['videos' => function($query) {
+        $playlist->load(['videos' => function ($query) {
             $query->latest();
         }, 'user']);
 
@@ -235,7 +235,7 @@ class PlaylistController extends Controller
             abort(403, 'This playlist is private.');
         }
 
-        $playlist->load(['videos' => function($query) {
+        $playlist->load(['videos' => function ($query) {
             $query->oldest('created_at'); // Play in order added
         }, 'user']);
 
