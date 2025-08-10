@@ -3,12 +3,12 @@
 @section('title', 'Playlists')
 
 @section('content')
-    <div class="min-vh-100 py-4" style="background-color: #FDFDFC;">
+    <div class="min-vh-100 py-4" style="">
         <div class="container">
             <!-- Header -->
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
-                    <h1 class="h3 fw-bold mb-1" style="color: #1b1b18;">Playlists</h1>
+                    <h1 class="h3 fw-bold mb-1">Playlists</h1>
                     <p class="text-muted mb-0">Manage your video playlists and discover others</p>
                 </div>
                 <a href="{{ route('playlists.create') }}" class="btn text-white fw-semibold"
@@ -21,7 +21,7 @@
             <!-- My Playlists Section -->
             <div class="mb-5">
                 <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h2 class="h4 fw-semibold mb-0" style="color: #1b1b18;">My Playlists</h2>
+                    <h2 class="h4 fw-semibold mb-0">My Playlists</h2>
                     <span class="small text-muted">{{ $userPlaylists->count() }} playlists</span>
                 </div>
 
@@ -36,7 +36,7 @@
                     @empty
                         <div class="col-12 text-center py-5">
                             <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
-                                style="width: 64px; height: 64px; background-color: #f8f9fa;">
+                                style="width: 64px; height: 64px;">
                                 <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                     class="text-muted">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -44,10 +44,9 @@
                                     </path>
                                 </svg>
                             </div>
-                            <h3 class="h5 fw-semibold mb-2" style="color: #1b1b18;">No playlists yet</h3>
+                            <h3 class="h5 fw-semibold mb-2">No playlists yet</h3>
                             <p class="text-muted mb-3">Create your first playlist to get started</p>
                             <a href="{{ route('playlists.create') }}" class="btn text-white fw-semibold"
-                                style="background-color: #F53003; border-color: #F53003;"
                                 onmouseover="this.style.backgroundColor='#d42a00'"
                                 onmouseout="this.style.backgroundColor='#F53003'">
                                 Create Your First Playlist
@@ -61,7 +60,7 @@
             @if ($publicPlaylists->count() > 0)
                 <div>
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h2 class="h4 fw-semibold mb-0" style="color: #1b1b18;">Discover Public Playlists</h2>
+                        <h2 class="h4 fw-semibold mb-0">Discover Public Playlists</h2>
                         <span class="small text-muted">{{ $publicPlaylists->count() }} playlists</span>
                     </div>
 
