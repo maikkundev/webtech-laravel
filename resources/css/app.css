@@ -1,15 +1,15 @@
 /* Custom Bootstrap Variables and Styles */
 :root {
-    --bs-primary: #F53003;
+    --bs-primary: #f53003;
     --bs-primary-rgb: 245, 48, 3;
     --bs-secondary: #706f6c;
     --bs-success: #28a745;
-    --bs-danger: #F53003;
+    --bs-danger: #f53003;
     --bs-warning: #ffc107;
     --bs-info: #17a2b8;
-    --bs-light: #FDFDFC;
+    --bs-light: #fdfdfc;
     --bs-dark: #1b1b18;
-    --bs-body-bg: #FDFDFC;
+    --bs-body-bg: #fdfdfc;
     --bs-body-color: #1b1b18;
     --bs-border-color: #e3e3e0;
 }
@@ -18,7 +18,7 @@
 [data-bs-theme="dark"] {
     --bs-body-bg: #0a0a0a;
     --bs-body-color: #e9ecef;
-    --bs-border-color: #3E3E3A;
+    --bs-border-color: #3e3e3a;
 }
 
 /* Button hover effects */
@@ -29,19 +29,19 @@
 
 /* Card hover effects */
 .card:hover {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.2s ease;
 }
 
 /* Custom focus styles */
 .form-control:focus {
-    border-color: #F53003;
+    border-color: #f53003;
     box-shadow: 0 0 0 0.2rem rgba(245, 48, 3, 0.25);
 }
 
 /* Navbar link hover */
 .navbar-nav .nav-link:hover {
-    color: #F53003 !important;
+    color: #f53003 !important;
     transition: color 0.2s ease;
 }
 
@@ -73,8 +73,14 @@
 
 /* Animation classes */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .fade-in {

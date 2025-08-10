@@ -1,5 +1,5 @@
 <!-- Navigation bar with Bootstrap classes -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm">
     <div class="container-fluid px-4">
         <!-- Brand/Logo -->
         <a class="navbar-brand fw-bold text-dark" href="/">
@@ -58,9 +58,9 @@
                 @endguest
 
                 <!-- Theme Toggle -->
-                <li class="nav-item">
-                    <button class="nav-link btn btn-link" id="theme-toggle" type="button">
-                        <i class="bi bi-sun-fill" id="theme-icon"></i>
+                <li class="nav-item me-2">
+                    <button class="theme-toggle" id="theme-toggle" title="Εναλλαγή θέματος">
+                        <i id="theme-icon" class="bi bi-moon-fill"></i>
                     </button>
                 </li>
             </ul>

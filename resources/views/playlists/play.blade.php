@@ -8,8 +8,8 @@
             <!-- Header -->
             <div class="mb-5">
                 <div class="d-flex align-items-center mb-4">
-                    <a href="{{ route('playlists.show', $playlist) }}"
-                        class="text-muted me-3 text-decoration-none" style="color: #706f6c !important;">
+                    <a href="{{ route('playlists.show', $playlist) }}" class="text-muted me-3 text-decoration-none"
+                        style="color: #706f6c !important;">
                         <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
                             </path>
@@ -51,15 +51,14 @@
 
                     <!-- Player Controls -->
                     <div class="d-flex align-items-center justify-content-center gap-3 mt-4">
-                        <button id="prev-btn" onclick="previousVideo()"
-                            class="btn btn-outline-secondary p-3 border" style="background-color: white; border-color: #e3e3e0;"
-                            disabled>
+                        <button id="prev-btn" onclick="previousVideo()" class="btn btn-outline-secondary p-3 border"
+                            style="background-color: white; border-color: #e3e3e0;" disabled>
                             <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
                             </svg>
                         </button>
-                        <button id="next-btn" onclick="nextVideo()"
-                            class="btn btn-outline-secondary p-3 border" style="background-color: white; border-color: #e3e3e0;">
+                        <button id="next-btn" onclick="nextVideo()" class="btn btn-outline-secondary p-3 border"
+                            style="background-color: white; border-color: #e3e3e0;">
                             <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
                             </svg>
@@ -79,9 +78,8 @@
                         <div class="overflow-auto" style="max-height: 500px;">
                             @foreach ($playlist->videos as $index => $video)
                                 <div class="video-item d-flex align-items-center p-3 border-bottom position-relative {{ $index === 0 ? 'bg-light current-video' : '' }}"
-                                    style="cursor: pointer; border-color: #e3e3e0;"
-                                    data-index="{{ $index }}" data-video-id="{{ $video->youtube_id }}"
-                                    data-title="{{ $video->title }}"
+                                    style="cursor: pointer; border-color: #e3e3e0;" data-index="{{ $index }}"
+                                    data-video-id="{{ $video->youtube_id }}" data-title="{{ $video->title }}"
                                     data-created="{{ $video->created_at->diffForHumans() }}"
                                     onclick="playVideo({{ $index }})">
 
@@ -92,8 +90,8 @@
 
                                     <!-- Video Thumbnail -->
                                     <div class="flex-shrink-0 position-relative me-3">
-                                        <img src="{{ $video->thumbnail_url }}" alt="{{ $video->title }}"
-                                            class="rounded" style="width: 64px; height: 48px; object-fit: cover;">
+                                        <img src="{{ $video->thumbnail_url }}" alt="{{ $video->title }}" class="rounded"
+                                            style="width: 64px; height: 48px; object-fit: cover;">
                                         @if ($index === 0)
                                             <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center rounded"
                                                 style="background-color: rgba(0,0,0,0.5);">
