@@ -2,6 +2,12 @@
 
 This project is a Laravel Web app that allows users to create and share video playlists.
 
+This project uses the YouTube Data API to search for videos and add them to playlists. Users can create their own profiles, manage their playlists, and follow other users to view their public playlists.
+
+# Instructions for Copilot
+
+For styling, always use Bootstrap classes and components. Use Bootstrap's grid system for layout and responsiveness.
+
 # Requirements
 
 There are the requirements in Greek:
