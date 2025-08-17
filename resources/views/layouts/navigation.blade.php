@@ -15,9 +15,25 @@
         <!-- Navigation links -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
+                <!-- Free Access Pages -->
                 <li class="nav-item">
                     <a class="nav-link" href="/">
                         <i class="bi bi-house me-1"></i>Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/help') }}">
+                        <i class="bi bi-question-circle me-1"></i>Help
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/lists') }}">
+                        <i class="bi bi-card-list me-1"></i>Lists
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/search') }}">
+                        <i class="bi bi-search me-1"></i>Search
                     </a>
                 </li>
             </ul>
