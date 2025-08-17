@@ -26,6 +26,7 @@
 
 <body>
     <div id="app">
+
         <!-- Navigation -->
         @include('layouts.navigation')
 

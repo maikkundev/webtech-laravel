@@ -2,8 +2,8 @@
 <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
     <div class="container-fluid px-4">
         <!-- Brand/Logo -->
-        <a class="navbar-brand fw-bold" href="/">
-            {{ config('app.name', 'Laravel') }}
+        <a class="navbar-brand" href="/">
+            <img src="{{ asset('looplogo.png') }}" alt="Website Logo" class="img-fluid" style="max-height: 60px;">
         </a>
 
         <!-- Mobile toggle button -->
