@@ -20,6 +20,13 @@
                         <i class="bi bi-house me-1"></i>Home
                     </a>
                 </li>
+                <!-- Help Link -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('help') }}">
+                        <i class="bi bi-question-circle me-1"></i>Help
+                    </a>
+                </li>
+
             </ul>
 
             <!-- Right side navigation -->
