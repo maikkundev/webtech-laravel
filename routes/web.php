@@ -10,6 +10,10 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::get('/help', function () {
+    return view('help');
+})->name('help');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
