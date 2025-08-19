@@ -9,7 +9,7 @@
             <div class="mb-4">
                 <div class="d-flex align-items-center mb-3">
                     <a href="{{ route('playlists.show', $playlist) }}" class="text-decoration-none text-muted me-3"
-                        onmouseover="this.style.color='#F53003'" onmouseout="this.style.color='#6c757d'">
+                       onmouseover="this.style.color='#F53003'" onmouseout="this.style.color='#6c757d'">
                         <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
                             </path>
@@ -36,12 +36,13 @@
                                         YouTube URL
                                     </label>
                                     <input type="url" id="youtube_url" name="youtube_url"
-                                        placeholder="https://www.youtube.com/watch?v=..." value="{{ old('youtube_url') }}"
-                                        class="form-control" style="border-color: #e3e3e0; color: #1b1b18;"
-                                        onfocus="this.style.borderColor='#F53003'; this.style.boxShadow='0 0 0 0.2rem rgba(245, 48, 3, 0.25)'"
-                                        onblur="this.style.borderColor='#e3e3e0'; this.style.boxShadow='none'">
+                                           placeholder="https://www.youtube.com/watch?v=..."
+                                           value="{{ old('youtube_url') }}"
+                                           class="form-control" style="border-color: #e3e3e0; color: #1b1b18;"
+                                           onfocus="this.style.borderColor='#F53003'; this.style.boxShadow='0 0 0 0.2rem rgba(245, 48, 3, 0.25)'"
+                                           onblur="this.style.borderColor='#e3e3e0'; this.style.boxShadow='none'">
                                     @error('youtube_url')
-                                        <div class="text-danger small mt-1">{{ $message }}</div>
+                                    <div class="text-danger small mt-1">{{ $message }}</div>
                                     @enderror
                                 </div>
 
@@ -50,21 +51,21 @@
                                         Video Title
                                     </label>
                                     <input type="text" id="video_title" name="title" placeholder="Enter video title"
-                                        value="{{ old('title') }}" required class="form-control"
-                                        style="border-color: #e3e3e0; color: #1b1b18;"
-                                        onfocus="this.style.borderColor='#F53003'; this.style.boxShadow='0 0 0 0.2rem rgba(245, 48, 3, 0.25)'"
-                                        onblur="this.style.borderColor='#e3e3e0'; this.style.boxShadow='none'">
+                                           value="{{ old('title') }}" required class="form-control"
+                                           style="border-color: #e3e3e0; color: #1b1b18;"
+                                           onfocus="this.style.borderColor='#F53003'; this.style.boxShadow='0 0 0 0.2rem rgba(245, 48, 3, 0.25)'"
+                                           onblur="this.style.borderColor='#e3e3e0'; this.style.boxShadow='none'">
                                     @error('title')
-                                        <div class="text-danger small mt-1">{{ $message }}</div>
+                                    <div class="text-danger small mt-1">{{ $message }}</div>
                                     @enderror
                                 </div>
 
                                 <input type="hidden" id="youtube_id" name="youtube_id" value="{{ old('youtube_id') }}">
 
                                 <button type="submit" class="btn w-100 text-white fw-semibold"
-                                    style="background-color: #F53003; border-color: #F53003;"
-                                    onmouseover="this.style.backgroundColor='#d42a00'"
-                                    onmouseout="this.style.backgroundColor='#F53003'">
+                                        style="background-color: #F53003; border-color: #F53003;"
+                                        onmouseover="this.style.backgroundColor='#d42a00'"
+                                        onmouseout="this.style.backgroundColor='#F53003'">
                                     Add Video to Playlist
                                 </button>
                             </form>
@@ -81,17 +82,17 @@
                             <div class="mb-3">
                                 <div class="position-relative">
                                     <input type="text" id="search_query" placeholder="Search for videos..."
-                                        class="form-control pe-5" style="border-color: #e3e3e0; color: #1b1b18;"
-                                        onfocus="this.style.borderColor='#F53003'; this.style.boxShadow='0 0 0 0.2rem rgba(245, 48, 3, 0.25)'"
-                                        onblur="this.style.borderColor='#e3e3e0'; this.style.boxShadow='none'">
+                                           class="form-control pe-5" style="border-color: #e3e3e0; color: #1b1b18;"
+                                           onfocus="this.style.borderColor='#F53003'; this.style.boxShadow='0 0 0 0.2rem rgba(245, 48, 3, 0.25)'"
+                                           onblur="this.style.borderColor='#e3e3e0'; this.style.boxShadow='none'">
                                     <button type="button" onclick="searchVideos()"
-                                        class="btn position-absolute top-50 end-0 translate-middle-y border-0 text-muted"
-                                        style="margin-right: 8px;" onmouseover="this.style.color='#F53003'"
-                                        onmouseout="this.style.color='#6c757d'">
+                                            class="btn position-absolute top-50 end-0 translate-middle-y border-0 text-muted"
+                                            style="margin-right: 8px;" onmouseover="this.style.color='#F53003'"
+                                            onmouseout="this.style.color='#6c757d'">
                                         <svg width="20" height="20" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
+                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                         </svg>
                                     </button>
                                 </div>
@@ -110,7 +111,7 @@
 
     <script>
         // Extract YouTube ID from URL
-        document.getElementById('youtube_url').addEventListener('input', function() {
+        document.getElementById('youtube_url').addEventListener('input', function () {
             const url = this.value;
             const videoId = extractYouTubeId(url);
             document.getElementById('youtube_id').value = videoId || '';
@@ -167,7 +168,7 @@
         }
 
         // Allow search on Enter key
-        document.getElementById('search_query').addEventListener('keypress', function(e) {
+        document.getElementById('search_query').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 searchVideos();
             }

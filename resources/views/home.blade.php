@@ -15,7 +15,7 @@
                 </p>
                 <div class="d-flex gap-3 justify-content-center flex-wrap">
                     <a href="{{ route('playlists.index') }}" class="btn btn-light fw-semibold px-4 py-2"
-                        style="color: #F53003 !important;">
+                       style="color: #F53003 !important;">
                         Περιήγηση Λιστών
                     </a>
                     <a href="{{ route('videos.index') }}" class="btn btn-outline-light fw-semibold px-4 py-2">
@@ -41,10 +41,10 @@
                     <div class="col-md-4">
                         <div class="text-center p-4 h-100 border rounded bg-body">
                             <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
-                                style="width: 64px; height: 64px; background-color: #F53003;">
+                                 style="width: 64px; height: 64px; background-color: #F53003;">
                                 <svg width="32" height="32" fill="white" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 19V6l12 5.5z"></path>
+                                          d="M9 19V6l12 5.5z"></path>
                                 </svg>
                             </div>
                             <h3 class="h5 fw-semibold mb-2">Διαχείριση Βίντεο</h3>
@@ -55,10 +55,10 @@
                     <div class="col-md-4">
                         <div class="text-center p-4 h-100 border rounded bg-body">
                             <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
-                                style="width: 64px; height: 64px; background-color: #F53003;">
+                                 style="width: 64px; height: 64px; background-color: #F53003;">
                                 <svg width="32" height="32" fill="white" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                          d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
                                     </path>
                                 </svg>
                             </div>
@@ -70,10 +70,10 @@
                     <div class="col-md-4">
                         <div class="text-center p-4 h-100 border rounded bg-body">
                             <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
-                                style="width: 64px; height: 64px; background-color: #F53003;">
+                                 style="width: 64px; height: 64px; background-color: #F53003;">
                                 <svg width="32" height="32" fill="white" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                          d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                                 </svg>
                             </div>
                             <h3 class="h5 fw-semibold mb-2">Ταχύτητα</h3>
