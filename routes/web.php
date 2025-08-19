@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PlaylistController;
-use App\Http\Controllers\VideoController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VideoController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');

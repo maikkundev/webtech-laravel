@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePlaylistRequest;
-use App\Http\Requests\UpdatePlaylistRequest;
 use App\Models\Playlist;
 use App\Models\Video;
 use App\Services\YouTubeService;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class PlaylistController extends Controller
 {
@@ -47,14 +45,6 @@ class PlaylistController extends Controller
     }
 
     /**
-     * Show the form for creating a new playlist.
-     */
-    public function create(): View
-    {
-        return view('playlists.create');
-    }
-
-    /**
      * Store a newly created playlist.
      */
     public function store(Request $request): RedirectResponse
@@ -74,6 +64,14 @@ class PlaylistController extends Controller
 
         return redirect()->route('playlists.show', $playlist)
             ->with('success', 'Playlist created successfully.');
+    }
+
+    /**
+     * Show the form for creating a new playlist.
+     */
+    public function create(): View
+    {
+        return view('playlists.create');
     }
 
     /**

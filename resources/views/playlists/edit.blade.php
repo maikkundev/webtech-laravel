@@ -9,7 +9,7 @@
             <div class="mb-4">
                 <div class="d-flex align-items-center mb-3">
                     <a href="{{ route('playlists.show', $playlist) }}" class="text-muted me-3 text-decoration-none"
-                        style="color: #706f6c !important;">
+                       style="color: #706f6c !important;">
                         <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
                             </path>
@@ -32,10 +32,10 @@
                             Playlist Title *
                         </label>
                         <input type="text" id="title" name="title" value="{{ old('title', $playlist->title) }}"
-                            maxlength="100" required class="form-control py-3"
-                            style="border-color: #e3e3e0; color: #1b1b18;">
+                               maxlength="100" required class="form-control py-3"
+                               style="border-color: #e3e3e0; color: #1b1b18;">
                         @error('title')
-                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        <div class="text-danger small mt-1">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -45,9 +45,9 @@
                             Description
                         </label>
                         <textarea id="description" name="description" rows="4" class="form-control py-3"
-                            style="border-color: #e3e3e0; color: #1b1b18;">{{ old('description', $playlist->description) }}</textarea>
+                                  style="border-color: #e3e3e0; color: #1b1b18;">{{ old('description', $playlist->description) }}</textarea>
                         @error('description')
-                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        <div class="text-danger small mt-1">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -55,7 +55,7 @@
                     <div class="mb-5">
                         <div class="form-check">
                             <input type="checkbox" id="is_public" name="is_public" value="1"
-                                {{ old('is_public', $playlist->is_public) ? 'checked' : '' }} class="form-check-input">
+                                   {{ old('is_public', $playlist->is_public) ? 'checked' : '' }} class="form-check-input">
                             <label for="is_public" class="form-check-label small" style="color: #1b1b18;">
                                 Make this playlist public
                             </label>
@@ -69,8 +69,8 @@
                     <div class="d-flex justify-content-between">
                         <div>
                             <button type="button"
-                                onclick="if(confirm('Are you sure you want to delete this playlist? This action cannot be undone.')) document.getElementById('delete-form').submit();"
-                                class="btn btn-danger">
+                                    onclick="if(confirm('Are you sure you want to delete this playlist? This action cannot be undone.')) document.getElementById('delete-form').submit();"
+                                    class="btn btn-danger">
                                 Delete Playlist
                             </button>
                         </div>
@@ -79,7 +79,7 @@
                                 Cancel
                             </a>
                             <button type="submit" class="btn text-white"
-                                style="background-color: #F53003; border-color: #F53003;">
+                                    style="background-color: #F53003; border-color: #F53003;">
                                 Update Playlist
                             </button>
                         </div>
@@ -87,7 +87,8 @@
                 </form>
 
                 <!-- Hidden delete form -->
-                <form id="delete-form" action="{{ route('playlists.destroy', $playlist) }}" method="POST" class="d-none">
+                <form id="delete-form" action="{{ route('playlists.destroy', $playlist) }}" method="POST"
+                      class="d-none">
                     @csrf
                     @method('DELETE')
                 </form>
