@@ -1,3 +1,5 @@
+## How to run the web app
+
 1. **Clone the repository:**
 
    ```bash
@@ -24,6 +26,33 @@
    ```bash
    docker exec webtech-laravel-laravel.test-1 php artisan migrate  
    ```
+
+> [!WARNING] 
+> 
+>In Case of `2025_07_06_134850_create_sessions_table` not being migrated (check with `docker compose exec webtech-laravel php artisan migrate:status`), run the following:
+>1. Enter tinker mode:
+>    
+>    ```bash
+>   docker compose exec webtech-laravel php artisan tinker
+>   ```
+>   
+>2. Execute the following code snippet:
+>
+>    ```php
+>   <?php
+>    DB::table('migrations')->insert([
+>    'migration' => '2025_07_06_134850_create_sessions_table',
+>    'batch' => 1
+>    ]);
+>    exit
+>   ```
+>   
+>3. Rerun migrations:
+>
+>    ```bash
+>   docker exec webtech-laravel-laravel.test-1 php artisan migrate  
+>   ```
+
 
 ## Accessing the App
 
