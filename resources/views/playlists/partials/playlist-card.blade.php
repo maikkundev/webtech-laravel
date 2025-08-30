@@ -18,8 +18,13 @@
 
     <div class="card-body">
         <div class="mb-3">
-            <h3 class="h5 fw-semibold mb-2">
+            <h3 class="h5 fw-semibold mb-2 d-flex justify-content-between align-items-center ">
                 {{ $playlist->title }}
+                @if ($playlist->is_public)
+                    <span class="badge bg-success">Public</span>
+                @else
+                    <span class="badge bg-secondary">Private</span>
+                @endif
             </h3>
             @if ($showOwner)
                 <p class="small text-muted mb-2">
@@ -33,15 +38,6 @@
                 </p>
             @endif
         </div>
-        @if ($playlist->is_public)
-            <div class="mb-2">
-                <span class="badge bg-success">Public</span>
-            </div>
-        @else
-            <div class="mb-2">
-                <span class="badge bg-secondary">Private</span>
-            </div>
-        @endif
         <div class="d-flex align-items-center justify-content-between small">
             <div class="text-muted">
                 {{ $playlist->created_at->diffForHumans() }}
