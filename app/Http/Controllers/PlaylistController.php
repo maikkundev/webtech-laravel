@@ -33,15 +33,34 @@ class PlaylistController extends Controller
             ->latest()
             ->get();
 
-        // Get public playlists from followed users (for now, get all public playlists)
-        $publicPlaylists = Playlist::where('is_public', true)
+        // Get public playlists from followed users
+        $followedUsersIds = $user->following->pluck('id');
+        $followedUsersPlaylists = collect();
+
+        if ($followedUsersIds->isNotEmpty()) {
+            $followedUsersPlaylists = Playlist::where('is_public', true)
+                ->whereIn('user_id', $followedUsersIds)
+                ->with('user')
+                ->withCount('videos')
+                ->latest()
+                ->get();
+        }
+
+        // Get other public playlists (not from followed users, not own)
+        $otherPublicPlaylists = Playlist::where('is_public', true)
             ->where('user_id', '!=', $user->id)
+            ->whereNotIn('user_id', $followedUsersIds)
             ->with('user')
             ->withCount('videos')
             ->latest()
+            ->limit(6) // Limit to avoid overwhelming the page
             ->get();
 
-        return view('playlists.index', compact('userPlaylists', 'publicPlaylists'));
+        return view('playlists.index', compact(
+            'userPlaylists',
+            'followedUsersPlaylists',
+            'otherPublicPlaylists'
+        ));
     }
 
     /**

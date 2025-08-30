@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\FollowController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', static function () {
@@ -21,6 +22,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/playlists/{playlist}/videos', [PlaylistController::class, 'storeVideo'])->name('playlists.store-video');
     Route::get('/playlists/{playlist}/play', [PlaylistController::class, 'play'])->name('playlists.play');
     Route::get('/search/videos', [PlaylistController::class, 'searchVideos'])->name('search.videos');
+
+    // Follow Routes (Protected)
+    Route::get('/users/discover', [FollowController::class, 'discover'])->name('users.discover');
+    Route::post('/users/{user}/follow', [FollowController::class, 'follow'])->name('users.follow');
+    Route::post('/users/{user}/unfollow', [FollowController::class, 'unfollow'])->name('users.unfollow');
 
     // Video Routes (Protected)
     Route::resource('videos', VideoController::class);

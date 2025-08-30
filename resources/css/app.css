@@ -86,3 +86,15 @@
 .fade-in {
     animation: fadeIn 0.3s ease-out;
 }
+
+.playlist-thumbnail .playlist-play-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.playlist-thumbnail:hover .playlist-play-overlay {
+    opacity: 1;
+}
+
+

@@ -64,5 +64,24 @@
                 @endif
             </div>
         </div>
+        @if (isset($showFollowButton) && $showFollowButton && auth()->check() && isset($playlist->user) && auth()->id() !== $playlist->user->id)
+            @php($isFollowing = auth()->user()->isFollowing($playlist->user))
+            <div class="mt-2 text-end">
+                @if ($isFollowing)
+                    <form action="{{ route('users.unfollow', $playlist->user) }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-sm btn-outline-secondary">Unfollow</button>
+                    </form>
+                @else
+                    <form action="{{ route('users.follow', $playlist->user) }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-sm text-white" style="background-color: #F53003; border-color: #F53003;"
+                                onmouseover="this.style.backgroundColor='#d42a00'" onmouseout="this.style.backgroundColor='#F53003'">
+                            Follow
+                        </button>
+                    </form>
+                @endif
+            </div>
+        @endif
     </div>
 </div>

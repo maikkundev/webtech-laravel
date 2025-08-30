@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -50,6 +51,52 @@ class User extends Authenticatable
     public function videos(): HasMany
     {
         return $this->hasMany(Video::class);
+    }
+
+    /**
+     * Users that this user is following.
+     */
+    public function following(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'following_id')
+            ->withTimestamps();
+    }
+
+    /**
+     * Users that are following this user.
+     */
+    public function followers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'follows', 'following_id', 'follower_id')
+            ->withTimestamps();
+    }
+
+    /**
+     * Check if this user is following another user.
+     */
+    public function isFollowing(User $user): bool
+    {
+        return $this->following()->where('following_id', $user->id)->exists();
+    }
+
+    /**
+     * Follow a user.
+     */
+    public function follow(User $user): bool
+    {
+        if ($user->id === $this->id) {
+            return false; // Can't follow yourself
+        }
+
+        return $this->following()->syncWithoutDetaching([$user->id]) !== [];
+    }
+
+    /**
+     * Unfollow a user.
+     */
+    public function unfollow(User $user): bool
+    {
+        return $this->following()->detach($user->id) > 0;
     }
 
     /**
