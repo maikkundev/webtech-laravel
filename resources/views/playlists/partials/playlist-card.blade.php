@@ -14,23 +14,13 @@
                 <span class="small fw-medium">{{ $playlist->videos_count ?? 0 }} videos</span>
             </div>
         </div>
-        @if ($playlist->is_public)
-            <div class="position-absolute top-0 end-0 m-3">
-                <span class="badge bg-success">Public</span>
-            </div>
-        @else
-            <div class="position-absolute top-0 end-0 m-3">
-                <span class="badge bg-secondary">Private</span>
-            </div>
-        @endif
     </div>
 
     <div class="card-body">
         <div class="mb-3">
-            <h3 class="h5 fw-semibold mb-2" ">
-            {{ $playlist->title }}
+            <h3 class="h5 fw-semibold mb-2">
+                {{ $playlist->title }}
             </h3>
-
             @if ($showOwner)
                 <p class="small text-muted mb-2">
                     by {{ $playlist->user->firstname }} {{ $playlist->user->lastname }}
@@ -43,7 +33,15 @@
                 </p>
             @endif
         </div>
-
+        @if ($playlist->is_public)
+            <div class="mb-2">
+                <span class="badge bg-success">Public</span>
+            </div>
+        @else
+            <div class="mb-2">
+                <span class="badge bg-secondary">Private</span>
+            </div>
+        @endif
         <div class="d-flex align-items-center justify-content-between small">
             <div class="text-muted">
                 {{ $playlist->created_at->diffForHumans() }}
