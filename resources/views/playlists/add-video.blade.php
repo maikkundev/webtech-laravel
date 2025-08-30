@@ -151,9 +151,6 @@
                     <h4 class="small fw-medium mb-0 text-truncate" style="color: #1b1b18;">${video.title}</h4>
                     <p class="small text-muted mb-0">${video.channel}</p>
                 </div>
-                <svg width="20" height="20" fill="#F53003" viewBox="0 0 24 24">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
             </div>
         `).join('');
             } catch (error) {
