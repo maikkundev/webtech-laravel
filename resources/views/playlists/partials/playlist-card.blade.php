@@ -1,19 +1,18 @@
 <div class="card h-100 border shadow-sm" style="border-color: #e3e3e0;">
     <!-- Playlist Thumbnail -->
-    <div class="position-relative" style="height: 200px; ">
+    <div class="position-relative playlist-thumbnail" style="height: 200px;">
         @if ($playlist->videos->count() > 0)
             <img src="{{ $playlist->videos->first()->thumbnail_url }}" alt="{{ $playlist->title }}" class="w-100 h-100"
                  style="object-fit: cover;">
+            <a href="{{ route('playlists.play', $playlist) }}"
+               class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center text-white text-decoration-none playlist-play-overlay">
+                <div class="text-center">
+                    <svg width="48" height="48" fill="currentColor" viewBox="0 0 24 24" class="mb-2">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                </div>
+            </a>
         @endif
-        <div
-            class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center text-white">
-            <div class="text-center">
-                <svg width="48" height="48" fill="currentColor" viewBox="0 0 24 24" class="mb-2">
-                    <path d="M8 5v14l11-7z"/>
-                </svg>
-                <span class="small fw-medium">{{ $playlist->videos_count ?? 0 }} videos</span>
-            </div>
-        </div>
     </div>
 
     <div class="card-body">
@@ -37,6 +36,7 @@
                     {{ $playlist->description }}
                 </p>
             @endif
+            <span class="small fw-medium">{{ $playlist->videos_count ?? 0 }} videos</span>
         </div>
         <div class="d-flex align-items-center justify-content-between small">
             <div class="text-muted">
