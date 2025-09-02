@@ -12,8 +12,8 @@
                     <p class="text-muted mb-0">Manage your video playlists and discover others</p>
                 </div>
                 <a href="{{ route('playlists.create') }}" class="btn text-white fw-semibold"
-                    style="background-color: #F53003; border-color: #F53003;"
-                    onmouseover="this.style.backgroundColor='#d42a00'" onmouseout="this.style.backgroundColor='#F53003'">
+                   style="background-color: #F53003; border-color: #F53003;"
+                   onmouseover="this.style.backgroundColor='#d42a00'" onmouseout="this.style.backgroundColor='#F53003'">
                     Create Playlist
                 </a>
             </div>
@@ -36,19 +36,19 @@
                     @empty
                         <div class="col-12 text-center py-5">
                             <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
-                                style="width: 64px; height: 64px;">
+                                 style="width: 64px; height: 64px;">
                                 <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    class="text-muted">
+                                     class="text-muted">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                          d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
                                     </path>
                                 </svg>
                             </div>
                             <h3 class="h5 fw-semibold mb-2">No playlists yet</h3>
                             <p class="text-muted mb-3">Create your first playlist to get started</p>
                             <a href="{{ route('playlists.create') }}" class="btn text-white fw-semibold"
-                                onmouseover="this.style.backgroundColor='#d42a00'"
-                                onmouseout="this.style.backgroundColor='#F53003'">
+                               onmouseover="this.style.backgroundColor='#d42a00'"
+                               onmouseout="this.style.backgroundColor='#F53003'">
                                 Create Your First Playlist
                             </a>
                         </div>

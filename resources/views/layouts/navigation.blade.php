@@ -8,7 +8,7 @@
 
         <!-- Mobile toggle button -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -52,40 +52,37 @@
                         </a>
                     </li>
                 @else
-                <!-- Additional links for authenticated users -->
-                  <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/profile') }}">
-                            <i class="bi bi-person me-1"></i>Profile
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/lists/create') }}">
-                            <i class="bi bi-plus-circle me-1"></i>Create List
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/playback') }}">
-                            <i class="bi bi-play-btn me-1"></i>Αναπαραγωγή περιεχομένου
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/followed-lists/edit') }}">
-                            <i class="bi bi-pencil-square me-1"></i>Επεξεργασία λιστών χρηστών που ακολουθεί
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/export-open-data') }}">
-                            <i class="bi bi-file-earmark-arrow-down me-1"></i>Εξαγωγή open data
-                        </a>
-                    </li>
-                    
-
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                           data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person-circle me-1"></i>{{ Auth::user()->username }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{{ url('/profile') }}">
+                                    <i class="bi bi-person me-2"></i>Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ url('/lists/create') }}">
+                                    <i class="bi bi-plus-circle me-2"></i>Create List
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ url('/playback') }}">
+                                    <i class="bi bi-play-btn me-2"></i>Αναπαραγωγή περιεχομένου
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ url('/followed-lists/edit') }}">
+                                    <i class="bi bi-pencil-square me-2"></i>Επεξεργασία λιστών χρηστών που ακολουθεί
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ url('/export-open-data') }}">
+                                    <i class="bi bi-file-earmark-arrow-down me-2"></i>Εξαγωγή open data
+                                </a>
+                            </li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

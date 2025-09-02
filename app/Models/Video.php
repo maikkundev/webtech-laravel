@@ -35,6 +35,16 @@ class Video extends Model
     }
 
     /**
+     * Get the high quality thumbnail URL.
+     *
+     * @return string
+     */
+    public function getHighQualityThumbnailUrl(): string
+    {
+        return $this->getThumbnailUrl('maxresdefault');
+    }
+
+    /**
      * Get the thumbnail URL for the YouTube video.
      *
      * @param string $quality The quality of the thumbnail (default, mqdefault, hqdefault, sddefault, maxresdefault)
@@ -43,16 +53,6 @@ class Video extends Model
     public function getThumbnailUrl(string $quality = 'hqdefault'): string
     {
         return "https://img.youtube.com/vi/{$this->youtube_id}/{$quality}.jpg";
-    }
-
-    /**
-     * Get the high quality thumbnail URL.
-     *
-     * @return string
-     */
-    public function getHighQualityThumbnailUrl(): string
-    {
-        return $this->getThumbnailUrl('maxresdefault');
     }
 
     /**

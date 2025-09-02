@@ -3,13 +3,13 @@
     <div class="position-relative" style="height: 200px; ">
         @if ($playlist->videos->count() > 0)
             <img src="{{ $playlist->videos->first()->thumbnail_url }}" alt="{{ $playlist->title }}" class="w-100 h-100"
-                style="object-fit: cover;">
+                 style="object-fit: cover;">
         @endif
         <div
             class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center text-white">
             <div class="text-center">
                 <svg width="48" height="48" fill="currentColor" viewBox="0 0 24 24" class="mb-2">
-                    <path d="M8 5v14l11-7z" />
+                    <path d="M8 5v14l11-7z"/>
                 </svg>
                 <span class="small fw-medium">{{ $playlist->videos_count ?? 0 }} videos</span>
             </div>
@@ -28,20 +28,20 @@
     <div class="card-body">
         <div class="mb-3">
             <h3 class="h5 fw-semibold mb-2" ">
-                {{ $playlist->title }}
+            {{ $playlist->title }}
             </h3>
 
-                 @if ($showOwner)
+            @if ($showOwner)
                 <p class="small text-muted mb-2">
                     by {{ $playlist->user->firstname }} {{ $playlist->user->lastname }}
                 </p>
-                @endif
+            @endif
 
-                @if ($playlist->description)
-                    <p class="text-muted small text-truncate" style="max-height: 2.4em; overflow: hidden;">
-                        {{ $playlist->description }}
-                    </p>
-                @endif
+            @if ($playlist->description)
+                <p class="text-muted small text-truncate" style="max-height: 2.4em; overflow: hidden;">
+                    {{ $playlist->description }}
+                </p>
+            @endif
         </div>
 
         <div class="d-flex align-items-center justify-content-between small">
@@ -50,21 +50,21 @@
             </div>
             <div class="d-flex gap-3">
                 <a href="{{ route('playlists.show', $playlist) }}" class="text-decoration-none fw-medium"
-                    onmouseover="this.style.color='#d42a00'" style="color: #F53003;"
-                    onmouseout="this.style.color='#F53003'">
+                   onmouseover="this.style.color='#d42a00'" style="color: #F53003;"
+                   onmouseout="this.style.color='#F53003'">
                     View
                 </a>
                 @if ($playlist->videos_count > 0)
                     <a href="{{ route('playlists.play', $playlist) }}" class="text-decoration-none fw-medium"
-                        style="color: #F53003;" onmouseover="this.style.color='#d42a00'"
-                        onmouseout="this.style.color='#F53003'">
+                       style="color: #F53003;" onmouseover="this.style.color='#d42a00'"
+                       onmouseout="this.style.color='#F53003'">
                         Play
                     </a>
                 @endif
                 @if (!$showOwner)
                     <a href="{{ route('playlists.edit', $playlist) }}" onmouseover="this.style.color='#d42a00'"
-                        style="color: #F53003;" onmouseout="this.style.color='#F53003'"
-                        class="text-decoration-none fw-medium">
+                       style="color: #F53003;" onmouseout="this.style.color='#F53003'"
+                       class="text-decoration-none fw-medium">
                         Edit
                     </a>
                 @endif
