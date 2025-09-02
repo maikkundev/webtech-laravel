@@ -11,7 +11,7 @@
                     <h1 class="h4 fw-semibold mb-1" style="color: #1b1b18;">
                         {{ $user->firstname }} {{ $user->lastname }}
                     </h1>
-                    <p class="text-muted small mb-0">@{{ $user - > username }}</p>
+                    <p class="text-muted small mb-0">{{ $user -> username }}</p>
                 </div>
                 <a href="{{ route('profile.edit') }}" class="btn btn-sm text-white"
                    style="background-color: #F53003; border-color: #F53003;">
