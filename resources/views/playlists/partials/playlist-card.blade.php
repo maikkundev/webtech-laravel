@@ -44,21 +44,18 @@
             </div>
             <div class="d-flex gap-3">
                 <a href="{{ route('playlists.show', $playlist) }}" class="text-decoration-none fw-medium"
-                   onmouseover="this.style.color='#d42a00'" style="color: #F53003;"
-                   onmouseout="this.style.color='#F53003'">
+                   style="color: #F53003;">
                     View
                 </a>
                 @if ($playlist->videos_count > 0)
                     <a href="{{ route('playlists.play', $playlist) }}" class="text-decoration-none fw-medium"
-                       style="color: #F53003;" onmouseover="this.style.color='#d42a00'"
-                       onmouseout="this.style.color='#F53003'">
+                       style="color: #F53003;">
                         Play
                     </a>
                 @endif
                 @if (!$showOwner)
-                    <a href="{{ route('playlists.edit', $playlist) }}" onmouseover="this.style.color='#d42a00'"
-                       style="color: #F53003;" onmouseout="this.style.color='#F53003'"
-                       class="text-decoration-none fw-medium">
+                    <a href="{{ route('playlists.edit', $playlist) }}"
+                       style="color: #F53003;" class="text-decoration-none fw-medium">
                         Edit
                     </a>
                 @endif
@@ -75,8 +72,7 @@
                 @else
                     <form action="{{ route('users.follow', $playlist->user) }}" method="POST" class="d-inline">
                         @csrf
-                        <button type="submit" class="btn btn-sm text-white" style="background-color: #F53003; border-color: #F53003;"
-                                onmouseover="this.style.backgroundColor='#d42a00'" onmouseout="this.style.backgroundColor='#F53003'">
+                        <button type="submit" class="btn btn-sm text-white" style="background-color: #F53003; border-color: #F53003;">
                             Follow
                         </button>
                     </form>

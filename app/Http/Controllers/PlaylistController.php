@@ -99,7 +99,8 @@ class PlaylistController extends Controller
     public function show(Playlist $playlist): View
     {
         // Check if user can view this playlist
-        if (!$playlist->is_public && $playlist->user_id !== Auth::id()) {
+        // Allow if playlist is public OR if user is authenticated and owns the playlist
+        if (!$playlist->is_public && (!Auth::check() || $playlist->user_id !== Auth::id())) {
             abort(403, 'This playlist is private.');
         }
 
@@ -248,7 +249,8 @@ class PlaylistController extends Controller
     public function play(Playlist $playlist)
     {
         // Check if user can view this playlist
-        if (!$playlist->is_public && $playlist->user_id !== Auth::id()) {
+        // Allow if playlist is public OR if user is authenticated and owns the playlist
+        if (!$playlist->is_public && (!Auth::check() || $playlist->user_id !== Auth::id())) {
             abort(403, 'This playlist is private.');
         }
 

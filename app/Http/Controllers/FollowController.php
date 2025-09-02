@@ -47,25 +47,22 @@ class FollowController extends Controller
     }
 
     /**
-     * Show users to discover and follow.
+     * Show public playlists to discover.
      */
     public function discover(): View
     {
         $currentUser = Auth::user();
 
-        // Get all users with public playlists
-        $query = User::withCount(['playlists as public_playlists_count' => function ($query) {
-            $query->where('is_public', true);
-        }])
-        ->having('public_playlists_count', '>', 0);
+        // Get all public playlists with user relationship and video count
+        $query = \App\Models\Playlist::where('is_public', true)
+            ->with(['user', 'videos'])
+            ->withCount('videos');
 
-        // If user is authenticated, exclude self from results
-        if ($currentUser) {
-            $query->where('id', '!=', $currentUser->id);
-        }
+        // If user is authenticated, we can still show their own public playlists
+        // but we'll handle follow buttons differently in the view
 
-        $users = $query->latest()->get();
+        $playlists = $query->latest()->get();
 
-        return view('follows.discovery', compact('users'));
+        return view('follows.discovery', compact('playlists'));
     }
 }

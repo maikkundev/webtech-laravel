@@ -16,16 +16,19 @@ Route::get('/', static function () {
 // Public Routes
 Route::get('/users/discover', [FollowController::class, 'discover'])->name('users.discover');
 
+// Public playlist routes (for viewing and playing public playlists)
+Route::get('/playlists/{playlist}', [PlaylistController::class, 'show'])->name('playlists.show');
+Route::get('/playlists/{playlist}/play', [PlaylistController::class, 'play'])->name('playlists.play');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', static function () {
         return view('dashboard');
     })->name('dashboard');
 
-    // Playlist Routes (Protected)
-    Route::resource('playlists', PlaylistController::class);
+    // Playlist Routes (Protected) - excluding show and play which are public
+    Route::resource('playlists', PlaylistController::class)->except(['show']);
     Route::get('/playlists/{playlist}/add-video', [PlaylistController::class, 'addVideo'])->name('playlists.add-video');
     Route::post('/playlists/{playlist}/videos', [PlaylistController::class, 'storeVideo'])->name('playlists.store-video');
-    Route::get('/playlists/{playlist}/play', [PlaylistController::class, 'play'])->name('playlists.play');
     Route::get('/search/videos', [PlaylistController::class, 'searchVideos'])->name('search.videos');
 
     // Follow Routes (Protected)
