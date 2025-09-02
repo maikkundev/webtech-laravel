@@ -62,9 +62,9 @@ class OpenDataController extends Controller
     /**
      * Export all playlists (both public and private) and their content as YAML open data.
      *
-     * @return Response
+     * @return Response|null
      */
-    public function exportYaml()
+    public function exportYaml(): ?Response
     {
         try {
             // Get all playlists (both public and private) with their videos and users
