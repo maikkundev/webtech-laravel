@@ -27,24 +27,30 @@
                                         <h5 class="fw-semibold mb-1">{{ $user->fullname }}</h5>
                                         <p class="text-muted small mb-0">{{ '@' . $user->username }}</p>
                                     </div>
-                                    @if (auth()->user()->isFollowing($user))
-                                        <form action="{{ route('users.unfollow', $user) }}" method="POST" class="d-inline">
-                                            @csrf
-                                            <button type="submit" class="btn btn-sm btn-outline-secondary fw-semibold">
-                                                Unfollow
-                                            </button>
-                                        </form>
+                                    @auth
+                                        @if (auth()->user()->isFollowing($user))
+                                            <form action="{{ route('users.unfollow', $user) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                <button type="submit" class="btn btn-sm btn-outline-secondary fw-semibold">
+                                                    Unfollow
+                                                </button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('users.follow', $user) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                <button type="submit" class="btn btn-sm text-white fw-semibold"
+                                                        style="background-color: #F53003; border-color: #F53003;"
+                                                        onmouseover="this.style.backgroundColor='#d42a00'"
+                                                        onmouseout="this.style.backgroundColor='#F53003'">
+                                                    Follow
+                                                </button>
+                                            </form>
+                                        @endif
                                     @else
-                                        <form action="{{ route('users.follow', $user) }}" method="POST" class="d-inline">
-                                            @csrf
-                                            <button type="submit" class="btn btn-sm text-white fw-semibold"
-                                                    style="background-color: #F53003; border-color: #F53003;"
-                                                    onmouseover="this.style.backgroundColor='#d42a00'"
-                                                    onmouseout="this.style.backgroundColor='#F53003'">
-                                                Follow
-                                            </button>
-                                        </form>
-                                    @endif
+                                        <a href="{{ route('login') }}" class="btn btn-sm btn-outline-primary fw-semibold">
+                                            Login to Follow
+                                        </a>
+                                    @endauth
                                 </div>
                                 <div class="small text-muted">
                                     {{ $user->public_playlists_count }} public playlist{{ $user->public_playlists_count !== 1 ? 's' : '' }}

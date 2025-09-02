@@ -11,6 +11,11 @@ Route::get('/', static function () {
     return view('home');
 })->name('home');
 
+
+
+// Public Routes
+Route::get('/users/discover', [FollowController::class, 'discover'])->name('users.discover');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', static function () {
         return view('dashboard');
@@ -24,7 +29,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/search/videos', [PlaylistController::class, 'searchVideos'])->name('search.videos');
 
     // Follow Routes (Protected)
-    Route::get('/users/discover', [FollowController::class, 'discover'])->name('users.discover');
     Route::post('/users/{user}/follow', [FollowController::class, 'follow'])->name('users.follow');
     Route::post('/users/{user}/unfollow', [FollowController::class, 'unfollow'])->name('users.unfollow');
 

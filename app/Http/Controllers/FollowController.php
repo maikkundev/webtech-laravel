@@ -53,14 +53,18 @@ class FollowController extends Controller
     {
         $currentUser = Auth::user();
 
-        // Get all users with public playlists (excluding self)
-        $users = User::where('id', '!=', $currentUser->id)
-                    ->withCount(['playlists as public_playlists_count' => function ($query) {
-                        $query->where('is_public', true);
-                    }])
-                    ->having('public_playlists_count', '>', 0)
-                    ->latest()
-                    ->get();
+        // Get all users with public playlists
+        $query = User::withCount(['playlists as public_playlists_count' => function ($query) {
+            $query->where('is_public', true);
+        }])
+        ->having('public_playlists_count', '>', 0);
+
+        // If user is authenticated, exclude self from results
+        if ($currentUser) {
+            $query->where('id', '!=', $currentUser->id);
+        }
+
+        $users = $query->latest()->get();
 
         return view('follows.discovery', compact('users'));
     }
