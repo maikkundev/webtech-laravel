@@ -5,6 +5,7 @@ use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\OpenDataController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', static function () {
@@ -41,6 +42,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    // Open Data Export Routes (Protected)
+    Route::get('/export', [OpenDataController::class, 'index'])->name('export.index');
+    Route::get('/export/yaml', [OpenDataController::class, 'exportYaml'])->name('export.yaml');
 });
 
 // Authentication Routes
