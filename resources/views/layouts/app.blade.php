@@ -25,8 +25,16 @@
 </head>
 
 <body>
-    <div id="app">
+    <body style="margin: 0; padding: 0;">
+        <video autoplay muted loop playsinline id="bgVideo" style="position: fixed; top: 0; left: 0; min-width: 100%; min-height: 100%; object-fit: cover; z-index: -1;">
+        <source src="{{ asset('Loop.mp4') }}" type="video/mp4">
+        Ο περιηγητής σας δεν υποστηρίζει το video.
+    </video>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    @stack('scripts')
+    <div id="app">
+        
         <!-- Navigation -->
         @include('layouts.navigation')
 
