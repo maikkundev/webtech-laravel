@@ -25,9 +25,10 @@
 </head>
 
 <body>
-<div id="app">
-    <!-- Navigation -->
-    @include('layouts.navigation')
+    <div id="app">
+
+        <!-- Navigation -->
+        @include('layouts.navigation')
 
     <!-- Page Content -->
     <main>
