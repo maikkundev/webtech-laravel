@@ -70,17 +70,17 @@
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{{ url('/playback') }}">
-                                    <i class="bi bi-play-btn me-2"></i>Αναπαραγωγή περιεχομένου
+                                    <i class="bi bi-play-btn me-2"></i>Content Playback
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{{ url('/followed-lists/edit') }}">
-                                    <i class="bi bi-pencil-square me-2"></i>Επεξεργασία λιστών χρηστών που ακολουθεί
+                                    <i class="bi bi-pencil-square me-2"></i>Edit Followed User Lists
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{{ route('export.index') }}">
-                                    <i class="bi bi-file-earmark-arrow-down me-2"></i>Εξαγωγή open data
+                                    <i class="bi bi-file-earmark-arrow-down me-2"></i>Export Open Data
                                 </a>
                             </li>
                             <li>
@@ -100,7 +100,7 @@
 
                 <!-- Theme Toggle -->
                 <li class="nav-item me-2">
-                    <button class="theme-toggle" id="theme-toggle" title="Εναλλαγή θέματος">
+                    <button class="theme-toggle" id="theme-toggle" title="Toggle Theme">
                         <i id="theme-icon" class="bi bi-moon-fill"></i>
                     </button>
                 </li>
