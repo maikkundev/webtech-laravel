@@ -16,15 +16,15 @@ Route::get('/', static function () {
 
 // Public Routes
 Route::get('/users/discover', [FollowController::class, 'discover'])->name('users.discover');
+Route::get('/help', static function () {
+    return view('help');
+})->name('help');
 
 // Public playlist routes (for viewing and playing public playlists)
 Route::get('/playlists/{playlist}', [PlaylistController::class, 'show'])->name('playlists.show');
 Route::get('/playlists/{playlist}/play', [PlaylistController::class, 'play'])->name('playlists.play');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', static function () {
-        return view('dashboard');
-    })->name('dashboard');
 
     // Playlist Routes (Protected) - excluding show and play which are public
     Route::resource('playlists', PlaylistController::class)->except(['show']);
