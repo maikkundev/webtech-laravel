@@ -3,7 +3,11 @@
     <div class="container-fluid px-4">
         <!-- Brand/Logo -->
         <a class="navbar-brand" href="/">
-            <img src="{{ asset('looplogo.png') }}" alt="Website Logo" class="img-fluid" style="max-height: 60px;">
+            @php
+                $isDark = isset($_COOKIE['bs-theme']) && $_COOKIE['bs-theme'] === 'dark';
+                $logoSrc = $isDark ? asset('logo-dark.png') : asset('looplogo.png');
+            @endphp
+            <img id="navbar-logo" src="{{ $logoSrc }}" alt="Website Logo" class="img-fluid" style="max-height: 60px;">
         </a>
 
         <!-- Mobile toggle button -->
@@ -108,3 +112,26 @@
         </div>
     </div>
 </nav>
+
+<script>
+    // Function to get cookie value by name
+    function getCookie(name) {
+        let nameEQ = name + "=";
+        let ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+    // update logo
+    document.getElementById('theme-toggle').addEventListener('click', function() {
+        setTimeout(function() {
+            const currentTheme = getCookie('bs-theme');
+            const isDark = currentTheme === 'dark';
+            const logoSrc = isDark ? '{{ asset('logo-dark.png') }}' : '{{ asset('looplogo.png') }}';
+            document.getElementById('navbar-logo').src = logoSrc;
+        }, 100);
+    });
+</script>
