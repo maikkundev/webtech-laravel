@@ -31,6 +31,12 @@ Route::get('/playlists/{playlist}/play', [PlaylistController::class, 'play'])->n
 
 Route::middleware(['auth'])->group(function () {
 
+    //dashboard
+    Route::get('/dashboard', static function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+
     // Playlist Routes (Protected) - excluding show and play which are public
     Route::resource('playlists', PlaylistController::class)->except(['show']);
     Route::get('/playlists/{playlist}/add-video', [PlaylistController::class, 'addVideo'])->name('playlists.add-video');
