@@ -265,4 +265,40 @@ class PlaylistController extends Controller
 
         return view('playlists.play', compact('playlist'));
     }
+
+    /**
+     * Show content playback page - all playable playlists for the user
+     */
+    public function playbackIndex(): View
+    {
+        $user = Auth::user();
+
+        // Get user's own playlists that have videos
+        $userPlaylists = Playlist::where('user_id', $user->id)
+            ->has('videos')
+            ->with(['videos' => function ($query) {
+                $query->take(1); // Just get first video for thumbnail
+            }])
+            ->withCount('videos')
+            ->latest()
+            ->get();
+
+        // Get public playlists from followed users that have videos
+        $followedUsersIds = $user->following->pluck('id');
+        $followedUsersPlaylists = collect();
+
+        if ($followedUsersIds->isNotEmpty()) {
+            $followedUsersPlaylists = Playlist::where('is_public', true)
+                ->whereIn('user_id', $followedUsersIds)
+                ->has('videos')
+                ->with(['user', 'videos' => function ($query) {
+                    $query->take(1); // Just get first video for thumbnail
+                }])
+                ->withCount('videos')
+                ->latest()
+                ->get();
+        }
+
+        return view('playback.index', compact('userPlaylists', 'followedUsersPlaylists'));
+    }
 }

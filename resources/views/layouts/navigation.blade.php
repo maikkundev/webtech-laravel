@@ -68,17 +68,17 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{ url('/lists/create') }}">
+                                <a class="dropdown-item" href="{{ route('playlists.create') }}">
                                     <i class="bi bi-plus-circle me-2"></i>Create List
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{ url('/playback') }}">
+                                <a class="dropdown-item" href="{{ route('playback.index') }}">
                                     <i class="bi bi-play-btn me-2"></i>Content Playback
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{ url('/followed-lists/edit') }}">
+                                <a class="dropdown-item" href="{{ route('followed-lists.edit') }}">
                                     <i class="bi bi-pencil-square me-2"></i>Edit Followed User Lists
                                 </a>
                             </li>

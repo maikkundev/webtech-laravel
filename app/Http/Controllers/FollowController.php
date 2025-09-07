@@ -65,4 +65,27 @@ class FollowController extends Controller
 
         return view('follows.discovery', compact('playlists'));
     }
+
+    /**
+     * Show page to manage followed users.
+     */
+    public function editFollowedLists(): View
+    {
+        $currentUser = Auth::user();
+
+        // Get all users that the current user is following
+        $followedUsers = $currentUser->following()->withCount('playlists')->get();
+
+        // Get suggested users to follow (users with public playlists that current user doesn't follow)
+        $suggestedUsers = User::whereHas('playlists', function ($query) {
+            $query->where('is_public', true);
+        })
+            ->where('id', '!=', $currentUser->id)
+            ->whereNotIn('id', $followedUsers->pluck('id'))
+            ->withCount('playlists')
+            ->take(10)
+            ->get();
+
+        return view('follows.edit', compact('followedUsers', 'suggestedUsers'));
+    }
 }
