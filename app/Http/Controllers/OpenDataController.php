@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Playlist;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
@@ -41,7 +42,7 @@ class OpenDataController extends Controller
                 })->count(),
                 'total_users_with_content' => User::whereHas('playlists')->count()
             ];
-        } catch (\Exception $e) {
+        } catch (Exception) {
             // Fallback stats if database is not available
             $stats = [
                 'total_public_playlists' => 0,
@@ -133,7 +134,7 @@ class OpenDataController extends Controller
             return response($yamlContent)
                 ->header('Content-Type', 'application/x-yaml')
                 ->header('Content-Disposition', 'attachment; filename="playlists_complete_export_' . now()->format('Y-m-d_H-i-s') . '.yaml"');
-        } catch (\Exception $e) {
+        } catch (Exception) {
             // Handle errors gracefully
             $errorData = [
                 'metadata' => [
