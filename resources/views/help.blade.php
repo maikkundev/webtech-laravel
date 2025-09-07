@@ -50,8 +50,7 @@
         <!-- FAQ Section -->
         <div class="accordion-item mb-3 card">
             <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
-                        data-bs-target="#faqContent">
+                        data-bs-target="#faqContent" aria-expanded="false" aria-controls="faqContent">
                     <i class="bi bi-question-circle me-2"></i>
                     Frequently Asked Questions
                 </button>
