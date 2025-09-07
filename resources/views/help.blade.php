@@ -30,8 +30,7 @@
         <!-- Features Section -->
         <div class="accordion-item mb-3 card">
             <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
-                        data-bs-target="#featuresContent">
+                        data-bs-target="#featuresContent" aria-expanded="false" aria-controls="featuresContent">
                     <i class="bi bi-star me-2"></i>
                     Main Features
                 </button>
