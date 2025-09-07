@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Αρχική')
+@section('title', 'Home')
 
 @section('content')
     <div class="min-vh-100">
@@ -8,18 +8,18 @@
         <div class="text-white py-5" style="background: linear-gradient(135deg, #F53003 0%, #d42a00 100%);">
             <div class="container-xxl text-center py-5">
                 <h1 class="display-4 fw-bold mb-4">
-                    Καλώς ήρθατε στο {{ config('app.name', 'WebTech Laravel') }}
+                    Welcome to {{ config('app.name', 'WebTech Laravel') }}
                 </h1>
                 <p class="lead mb-4">
-                    Διαχειριστείτε τις λίστες βίντεο και το περιεχόμενό σας με ευκολία
+                    Manage your video playlists and content with ease
                 </p>
                 <div class="d-flex gap-3 justify-content-center flex-wrap">
                     <a href="{{ route('playlists.index') }}" class="btn btn-light fw-semibold px-4 py-2"
                         style="color: #F53003 !important;">
-                        Περιήγηση Λιστών
+                        Browse Playlists
                     </a>
                     <a href="{{ route('videos.index') }}" class="btn btn-outline-light fw-semibold px-4 py-2">
-                        Προβολή Βίντεο
+                        View Videos
                     </a>
                 </div>
             </div>
@@ -30,10 +30,10 @@
             <div class="container-xxl">
                 <div class="text-center mb-5">
                     <h2 class="display-5 fw-bold mb-3">
-                        Χαρακτηριστικά
+                        Features
                     </h2>
                     <p class="lead text-body-secondary">
-                        Όλα όσα χρειάζεστε για τη διαχείριση του περιεχομένου σας
+                        Everything you need to manage your content
                     </p>
                 </div>
 
@@ -47,8 +47,8 @@
                                         d="M9 19V6l12 5.5z"></path>
                                 </svg>
                             </div>
-                            <h3 class="h5 fw-semibold mb-2">Διαχείριση Βίντεο</h3>
-                            <p class="text-body-secondary">Οργανώστε και διαχειριστείτε τη συλλογή βίντεο σας</p>
+                            <h3 class="h5 fw-semibold mb-2">Video Management</h3>
+                            <p class="text-body-secondary">Organize and manage your video collection</p>
                         </div>
                     </div>
 
@@ -62,8 +62,8 @@
                                     </path>
                                 </svg>
                             </div>
-                            <h3 class="h5 fw-semibold mb-2">Δημιουργία Λιστών</h3>
-                            <p class="text-body-secondary">Δημιουργήστε προσαρμοσμένες λίστες για το περιεχόμενό σας</p>
+                            <h3 class="h5 fw-semibold mb-2">Create Playlists</h3>
+                            <p class="text-body-secondary">Create custom playlists for your content</p>
                         </div>
                     </div>
 
@@ -76,8 +76,8 @@
                                         d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                                 </svg>
                             </div>
-                            <h3 class="h5 fw-semibold mb-2">Ταχύτητα</h3>
-                            <p class="text-body-secondary">Κατασκευασμένο με Laravel για βέλτιστη απόδοση</p>
+                            <h3 class="h5 fw-semibold mb-2">Speed</h3>
+                            <p class="text-body-secondary">Built with Laravel for optimal performance</p>
                         </div>
                     </div>
                 </div>

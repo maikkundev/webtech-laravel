@@ -10,7 +10,7 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet"/>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -26,40 +26,41 @@
 
 <body>
     <div id="app">
+
         <!-- Navigation -->
         @include('layouts.navigation')
 
-        <!-- Page Content -->
-        <main>
-            <!-- Success Messages -->
-            @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show mx-3 mt-3" role="alert">
-                    <div class="d-flex align-items-start">
-                        <svg class="me-2 mt-1" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <div>
-                            <small class="fw-medium">
-                                {{ session('success') }}
-                            </small>
-                        </div>
+    <!-- Page Content -->
+    <main>
+        <!-- Success Messages -->
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show mx-3 mt-3" role="alert">
+                <div class="d-flex align-items-start">
+                    <svg class="me-2 mt-1" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <div>
+                        <small class="fw-medium">
+                            {{ session('success') }}
+                        </small>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            @endif
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
 
-            @yield('content')
-        </main>
+        @yield('content')
+    </main>
 
-        <!-- Footer -->
-        @include('layouts.footer')
-    </div>
+    <!-- Footer -->
+    @include('layouts.footer')
+</div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    @stack('scripts')
+@stack('scripts')
 </body>
 
 </html>

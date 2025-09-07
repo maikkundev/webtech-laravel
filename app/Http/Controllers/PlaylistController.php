@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePlaylistRequest;
-use App\Http\Requests\UpdatePlaylistRequest;
 use App\Models\Playlist;
 use App\Models\Video;
 use App\Services\YouTubeService;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class PlaylistController extends Controller
 {
@@ -35,23 +33,34 @@ class PlaylistController extends Controller
             ->latest()
             ->get();
 
-        // Get public playlists from followed users (for now, get all public playlists)
-        $publicPlaylists = Playlist::where('is_public', true)
+        // Get public playlists from followed users
+        $followedUsersIds = $user->following->pluck('id');
+        $followedUsersPlaylists = collect();
+
+        if ($followedUsersIds->isNotEmpty()) {
+            $followedUsersPlaylists = Playlist::where('is_public', true)
+                ->whereIn('user_id', $followedUsersIds)
+                ->with('user')
+                ->withCount('videos')
+                ->latest()
+                ->get();
+        }
+
+        // Get other public playlists (not from followed users, not own)
+        $otherPublicPlaylists = Playlist::where('is_public', true)
             ->where('user_id', '!=', $user->id)
+            ->whereNotIn('user_id', $followedUsersIds)
             ->with('user')
             ->withCount('videos')
             ->latest()
+            ->limit(6) // Limit to avoid overwhelming the page
             ->get();
 
-        return view('playlists.index', compact('userPlaylists', 'publicPlaylists'));
-    }
-
-    /**
-     * Show the form for creating a new playlist.
-     */
-    public function create(): View
-    {
-        return view('playlists.create');
+        return view('playlists.index', compact(
+            'userPlaylists',
+            'followedUsersPlaylists',
+            'otherPublicPlaylists'
+        ));
     }
 
     /**
@@ -77,12 +86,21 @@ class PlaylistController extends Controller
     }
 
     /**
+     * Show the form for creating a new playlist.
+     */
+    public function create(): View
+    {
+        return view('playlists.create');
+    }
+
+    /**
      * Display the specified playlist with its videos.
      */
     public function show(Playlist $playlist): View
     {
         // Check if user can view this playlist
-        if (!$playlist->is_public && $playlist->user_id !== Auth::id()) {
+        // Allow if playlist is public OR if user is authenticated and owns the playlist
+        if (!$playlist->is_public && (!Auth::check() || $playlist->user_id !== Auth::id())) {
             abort(403, 'This playlist is private.');
         }
 
@@ -231,7 +249,8 @@ class PlaylistController extends Controller
     public function play(Playlist $playlist)
     {
         // Check if user can view this playlist
-        if (!$playlist->is_public && $playlist->user_id !== Auth::id()) {
+        // Allow if playlist is public OR if user is authenticated and owns the playlist
+        if (!$playlist->is_public && (!Auth::check() || $playlist->user_id !== Auth::id())) {
             abort(403, 'This playlist is private.');
         }
 

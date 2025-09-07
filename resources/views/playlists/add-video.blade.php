@@ -23,57 +23,8 @@
             </div>
 
             <div class="row g-4">
-                <!-- Add by URL -->
-                <div class="col-12 col-lg-6">
-                    <div class="card border h-100" style="background-color: white; border-color: #e3e3e0;">
-                        <div class="card-body">
-                            <h2 class="h5 fw-semibold mb-3" style="color: #1b1b18;">Add by YouTube URL</h2>
-
-                            <form action="{{ route('playlists.store-video', $playlist) }}" method="POST">
-                                @csrf
-                                <div class="mb-3">
-                                    <label for="youtube_url" class="form-label fw-medium" style="color: #1b1b18;">
-                                        YouTube URL
-                                    </label>
-                                    <input type="url" id="youtube_url" name="youtube_url"
-                                        placeholder="https://www.youtube.com/watch?v=..." value="{{ old('youtube_url') }}"
-                                        class="form-control" style="border-color: #e3e3e0; color: #1b1b18;"
-                                        onfocus="this.style.borderColor='#F53003'; this.style.boxShadow='0 0 0 0.2rem rgba(245, 48, 3, 0.25)'"
-                                        onblur="this.style.borderColor='#e3e3e0'; this.style.boxShadow='none'">
-                                    @error('youtube_url')
-                                        <div class="text-danger small mt-1">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="video_title" class="form-label fw-medium" style="color: #1b1b18;">
-                                        Video Title
-                                    </label>
-                                    <input type="text" id="video_title" name="title" placeholder="Enter video title"
-                                        value="{{ old('title') }}" required class="form-control"
-                                        style="border-color: #e3e3e0; color: #1b1b18;"
-                                        onfocus="this.style.borderColor='#F53003'; this.style.boxShadow='0 0 0 0.2rem rgba(245, 48, 3, 0.25)'"
-                                        onblur="this.style.borderColor='#e3e3e0'; this.style.boxShadow='none'">
-                                    @error('title')
-                                        <div class="text-danger small mt-1">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <input type="hidden" id="youtube_id" name="youtube_id" value="{{ old('youtube_id') }}">
-
-                                <button type="submit" class="btn w-100 text-white fw-semibold"
-                                    style="background-color: #F53003; border-color: #F53003;"
-                                    onmouseover="this.style.backgroundColor='#d42a00'"
-                                    onmouseout="this.style.backgroundColor='#F53003'">
-                                    Add Video to Playlist
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Search YouTube -->
-                <div class="col-12 col-lg-6">
+                <div class="col-12">
                     <div class="card border h-100" style="background-color: white; border-color: #e3e3e0;">
                         <div class="card-body">
                             <h2 class="h5 fw-semibold mb-3" style="color: #1b1b18;">Search YouTube</h2>
@@ -109,19 +60,6 @@
     </div>
 
     <script>
-        // Extract YouTube ID from URL
-        document.getElementById('youtube_url').addEventListener('input', function() {
-            const url = this.value;
-            const videoId = extractYouTubeId(url);
-            document.getElementById('youtube_id').value = videoId || '';
-        });
-
-        function extractYouTubeId(url) {
-            const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
-            const match = url.match(regex);
-            return match ? match[1] : null;
-        }
-
         // Search videos function
         async function searchVideos() {
             const query = document.getElementById('search_query').value;
@@ -140,19 +78,21 @@
                 }
 
                 resultsContainer.innerHTML = videos.map(video => `
-            <div class="d-flex align-items-center gap-3 p-2 rounded"
-                 style="cursor: pointer;"
-                 onclick="selectVideo('${video.id}', '${video.title.replace(/'/g, "\\'")}')"
-                 onmouseover="this.style.backgroundColor='#f8f9fa'"
-                 onmouseout="this.style.backgroundColor='transparent'">
+            <div class="d-flex align-items-center gap-3 p-2 rounded border mb-2"
+                 style="background-color: #fefefe; border-color: #e3e3e0;">
                 <img src="${video.thumbnail}" alt="${video.title}" class="rounded" style="width: 64px; height: 48px; object-fit: cover;">
                 <div class="flex-grow-1" style="min-width: 0;">
                     <h4 class="small fw-medium mb-0 text-truncate" style="color: #1b1b18;">${video.title}</h4>
                     <p class="small text-muted mb-0">${video.channel}</p>
                 </div>
-                <svg width="20" height="20" fill="#F53003" viewBox="0 0 24 24">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
+                <button type="button"
+                        onclick="addVideoToPlaylist('${video.id}', '${video.title.replace(/'/g, "\\'")}')"
+                        class="btn btn-sm text-white fw-semibold px-3"
+                        style="background-color: #F53003; border-color: #F53003;"
+                        onmouseover="this.style.backgroundColor='#d42a00'"
+                        onmouseout="this.style.backgroundColor='#F53003'">
+                    Add to Playlist
+                </button>
             </div>
         `).join('');
             } catch (error) {
@@ -160,10 +100,43 @@
             }
         }
 
-        function selectVideo(videoId, title) {
-            document.getElementById('youtube_id').value = videoId;
-            document.getElementById('video_title').value = title;
-            document.getElementById('youtube_url').value = `https://www.youtube.com/watch?v=${videoId}`;
+        function addVideoToPlaylist(videoId, title) {
+            // Create a form and submit it
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '{{ route('playlists.store-video', $playlist) }}';
+
+            // Add CSRF token
+            const csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = '_token';
+            csrfInput.value = '{{ csrf_token() }}';
+            form.appendChild(csrfInput);
+
+            // Add video ID
+            const videoIdInput = document.createElement('input');
+            videoIdInput.type = 'hidden';
+            videoIdInput.name = 'youtube_id';
+            videoIdInput.value = videoId;
+            form.appendChild(videoIdInput);
+
+            // Add video title
+            const titleInput = document.createElement('input');
+            titleInput.type = 'hidden';
+            titleInput.name = 'title';
+            titleInput.value = title;
+            form.appendChild(titleInput);
+
+            // Add YouTube URL
+            const urlInput = document.createElement('input');
+            urlInput.type = 'hidden';
+            urlInput.name = 'youtube_url';
+            urlInput.value = `https://www.youtube.com/watch?v=${videoId}`;
+            form.appendChild(urlInput);
+
+            // Submit the form
+            document.body.appendChild(form);
+            form.submit();
         }
 
         // Allow search on Enter key

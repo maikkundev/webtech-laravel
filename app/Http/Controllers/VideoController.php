@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Video;
 use App\Models\Playlist;
-use Illuminate\Http\Request;
+use App\Models\Video;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class VideoController extends Controller
 {
@@ -19,15 +19,6 @@ class VideoController extends Controller
         $videos = Video::with(['playlist', 'user'])->latest()->get();
 
         return view('videos.index', compact('videos'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(): View
-    {
-        $playlists = Playlist::where('user_id', Auth::id())->get();
-        return view('videos.create', compact('playlists'));
     }
 
     /**
@@ -62,6 +53,15 @@ class VideoController extends Controller
 
         return redirect()->route('playlists.show', $playlist)
             ->with('success', 'Video added successfully.');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create(): View
+    {
+        $playlists = Playlist::where('user_id', Auth::id())->get();
+        return view('videos.create', compact('playlists'));
     }
 
     /**

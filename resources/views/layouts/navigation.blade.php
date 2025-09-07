@@ -2,8 +2,8 @@
 <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
     <div class="container-fluid px-4">
         <!-- Brand/Logo -->
-        <a class="navbar-brand fw-bold" href="/">
-            {{ config('app.name', 'Laravel') }}
+        <a class="navbar-brand" href="/">
+            <img src="{{ asset('looplogo.png') }}" alt="Website Logo" class="img-fluid" style="max-height: 60px;">
         </a>
 
         <!-- Mobile toggle button -->
@@ -15,18 +15,27 @@
         <!-- Navigation links -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
+                <!-- Free Access Pages -->
                 <li class="nav-item">
                     <a class="nav-link" href="/">
                         <i class="bi bi-house me-1"></i>Home
                     </a>
                 </li>
-                <!-- Help Link -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('help') }}">
+                    <a class="nav-link" href="{{ url('/help') }}">
                         <i class="bi bi-question-circle me-1"></i>Help
                     </a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/users/discover') }}">
+                        <i class="bi bi-card-list me-1"></i>Lists
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/search') }}">
+                        <i class="bi bi-search me-1"></i>Search
+                    </a>
+                </li>
             </ul>
 
             <!-- Right side navigation -->
@@ -50,6 +59,31 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li>
+                                <a class="dropdown-item" href="{{ url('/profile') }}">
+                                    <i class="bi bi-person me-2"></i>Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ url('/lists/create') }}">
+                                    <i class="bi bi-plus-circle me-2"></i>Create List
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ url('/playback') }}">
+                                    <i class="bi bi-play-btn me-2"></i>Content Playback
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ url('/followed-lists/edit') }}">
+                                    <i class="bi bi-pencil-square me-2"></i>Edit Followed User Lists
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('export.index') }}">
+                                    <i class="bi bi-file-earmark-arrow-down me-2"></i>Export Open Data
+                                </a>
+                            </li>
+                            <li>
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
@@ -66,7 +100,7 @@
 
                 <!-- Theme Toggle -->
                 <li class="nav-item me-2">
-                    <button class="theme-toggle" id="theme-toggle" title="Εναλλαγή θέματος">
+                    <button class="theme-toggle" id="theme-toggle" title="Toggle Theme">
                         <i id="theme-icon" class="bi bi-moon-fill"></i>
                     </button>
                 </li>

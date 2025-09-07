@@ -6,15 +6,15 @@
     <div class="container-lg py-5">
         <div class="card border shadow-sm" style="background-color: white; border-color: #e3e3e0;">
             <div class="card-header border-bottom d-flex justify-content-between align-items-start"
-                style="border-color: #e3e3e0;">
+                 style="border-color: #e3e3e0;">
                 <div>
                     <h1 class="h4 fw-semibold mb-1" style="color: #1b1b18;">
                         {{ $user->firstname }} {{ $user->lastname }}
                     </h1>
-                    <p class="text-muted small mb-0">@{{ $user - > username }}</p>
+                    <p class="text-muted small mb-0">{{ $user -> username }}</p>
                 </div>
                 <a href="{{ route('profile.edit') }}" class="btn btn-sm text-white"
-                    style="background-color: #F53003; border-color: #F53003;">
+                   style="background-color: #F53003; border-color: #F53003;">
                     Edit Profile
                 </a>
             </div>
@@ -48,13 +48,15 @@
                         <div class="row g-3">
                             <div class="col-6">
                                 <div class="p-3 rounded" style="background-color: #f9f9f8;">
-                                    <div class="h4 fw-semibold mb-1" style="color: #F53003;">{{ $playlists->count() }}</div>
+                                    <div class="h4 fw-semibold mb-1"
+                                         style="color: #F53003;">{{ $playlists->count() }}</div>
                                     <div class="small text-muted">Playlists</div>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="p-3 rounded" style="background-color: #f9f9f8;">
-                                    <div class="h4 fw-semibold mb-1" style="color: #F53003;">{{ $user->videos->count() }}
+                                    <div class="h4 fw-semibold mb-1"
+                                         style="color: #F53003;">{{ $user->videos->count() }}
                                     </div>
                                     <div class="small text-muted">Videos</div>
                                 </div>
@@ -69,7 +71,7 @@
         @if ($playlists->count() > 0)
             <div class="card border shadow-sm mt-4" style="background-color: white; border-color: #e3e3e0;">
                 <div class="card-header border-bottom d-flex justify-content-between align-items-center"
-                    style="border-color: #e3e3e0;">
+                     style="border-color: #e3e3e0;">
                     <h2 class="h5 fw-semibold mb-0" style="color: #1b1b18;">Recent Playlists</h2>
                     <a href="{{ route('playlists.index') }}" class="text-decoration-none small" style="color: #F53003;">
                         View All
@@ -83,7 +85,7 @@
                                 <div class="p-3 rounded h-100" style="background-color: #f9f9f8;">
                                     <h3 class="fw-medium mb-2" style="color: #1b1b18;">
                                         <a href="{{ route('playlists.show', $playlist) }}" class="text-decoration-none"
-                                            style="color: #1b1b18;">
+                                           style="color: #1b1b18;">
                                             {{ $playlist->title }}
                                         </a>
                                     </h3>
@@ -93,7 +95,7 @@
                                         </p>
                                     @endif
                                     <div class="d-flex justify-content-between align-items-center text-muted"
-                                        style="font-size: 0.75rem;">
+                                         style="font-size: 0.75rem;">
                                         <span>{{ $playlist->videos->count() }} videos</span>
                                         <span>{{ $playlist->created_at->diffForHumans() }}</span>
                                     </div>
@@ -107,15 +109,15 @@
             <div class="card border shadow-sm mt-4 text-center" style="background-color: white; border-color: #e3e3e0;">
                 <div class="card-body py-5">
                     <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                        class="mx-auto text-muted mb-3">
+                         class="mx-auto text-muted mb-3">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 19V6l12-3v13M9 19c0 1.105-.895 2-2 2s-2-.895-2-2 .895-2 2-2 2 .895 2 2zm12-3c0 1.105-.895 2-2 2s-2-.895-2-2 .895-2 2-2 2 .895 2 2z" />
+                              d="M9 19V6l12-3v13M9 19c0 1.105-.895 2-2 2s-2-.895-2-2 .895-2 2-2 2 .895 2 2zm12-3c0 1.105-.895 2-2 2s-2-.895-2-2 .895-2 2-2 2 .895 2 2z"/>
                     </svg>
                     <h3 class="h6 fw-medium" style="color: #1b1b18;">No playlists yet</h3>
                     <p class="text-muted small">Get started by creating your first playlist.</p>
                     <div class="mt-3">
                         <a href="{{ route('playlists.create') }}" class="btn text-white"
-                            style="background-color: #F53003; border-color: #F53003;">
+                           style="background-color: #F53003; border-color: #F53003;">
                             Create Playlist
                         </a>
                     </div>
