@@ -23,7 +23,7 @@
 
                         <div class="row mb-4">
                             <div class="col-md-3">
-                                <div class="card bg-light">
+                                <div class="card border">
                                     <div class="card-body text-center">
                                         <h5 class="card-title text-primary">{{ $stats['total_public_playlists'] }}</h5>
                                         <p class="card-text">Public Playlists</p>
@@ -31,7 +31,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="card bg-light">
+                                <div class="card border">
                                     <div class="card-body text-center">
                                         <h5 class="card-title text-warning">{{ $stats['total_private_playlists'] }}</h5>
                                         <p class="card-text">Private Playlists</p>
@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="card bg-light">
+                                <div class="card border">
                                     <div class="card-body text-center">
                                         <h5 class="card-title text-success">{{ $stats['total_videos'] }}</h5>
                                         <p class="card-text">Total Videos</p>
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="card bg-light">
+                                <div class="card border">
                                     <div class="card-body text-center">
                                         <h5 class="card-title text-info">{{ $stats['total_users_with_content'] }}</h5>
                                         <p class="card-text">Contributing Users</p>
