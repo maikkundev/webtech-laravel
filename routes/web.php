@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\OpenDataController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', static function () {
@@ -19,6 +20,10 @@ Route::get('/users/discover', [FollowController::class, 'discover'])->name('user
 Route::get('/help', static function () {
     return view('help');
 })->name('help');
+
+// Search Routes (Public - accessible without authentication)
+Route::get('/search', [SearchController::class, 'index'])->name('search.index');
+Route::get('/search/results', [SearchController::class, 'search'])->name('search.results');
 
 // Public playlist routes (for viewing and playing public playlists)
 Route::get('/playlists/{playlist}', [PlaylistController::class, 'show'])->name('playlists.show');
