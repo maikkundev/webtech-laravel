@@ -6,6 +6,7 @@ use App\Models\Playlist;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Symfony\Component\Yaml\Yaml;
@@ -61,25 +62,43 @@ class OpenDataController extends Controller
     }
 
     /**
-     * Export all playlists (both public and private) and their content as YAML open data.
+     * Export user's playlists and playlists from users they follow as YAML open data.
      *
      * @return Response|null
      */
     public function exportYaml(): ?Response
     {
         try {
-            // Get all playlists (both public and private) with their videos and users
-            $playlists = Playlist::with(['videos', 'user'])
-                ->orderBy('created_at', 'desc')
+            $user = Auth::user();
+            
+            // Get user's own playlists
+            $userPlaylists = Playlist::with(['videos', 'user'])
+                ->where('user_id', $user->id)
                 ->get();
+            
+            // Get followed user IDs safely
+            $followedUserIds = $user->following()->pluck('users.id');
+            
+            // Get playlists from users that the current user follows (only public ones)
+            $followedUsersPlaylists = collect();
+            if ($followedUserIds->isNotEmpty()) {
+                $followedUsersPlaylists = Playlist::with(['videos', 'user'])
+                    ->whereIn('user_id', $followedUserIds)
+                    ->where('is_public', true)
+                    ->get();
+            }
+            
+            // Merge both collections
+            $playlists = $userPlaylists->merge($followedUsersPlaylists)
+                ->sortByDesc('created_at');
 
             $exportData = [
                 'metadata' => [
                     'export_date' => now()->toISOString(),
-                    'description' => 'Open data export of all playlists (public and private)',
+                    'description' => 'Open data export of user playlists and followed users public playlists',
                     'total_playlists' => $playlists->count(),
-                    'total_public_playlists' => $playlists->where('is_public', true)->count(),
-                    'total_private_playlists' => $playlists->where('is_public', false)->count(),
+                    'user_playlists' => $userPlaylists->count(),
+                    'followed_users_playlists' => $followedUsersPlaylists->count(),
                     'privacy_notice' => 'Personal information has been anonymized with unique identifiers'
                 ],
                 'playlists' => []

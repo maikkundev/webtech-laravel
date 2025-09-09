@@ -17,58 +17,50 @@
                         <div class="alert alert-info" role="alert">
                             <i class="bi bi-info-circle me-2"></i>
                             <strong>About Open Data Export:</strong>
-                            This feature exports all playlists (both public and private) and their videos in YAML format
+                            This feature exports your own playlists and public playlists from users you follow in YAML format
                             while preserving user privacy through anonymization.
                         </div>
 
                         <div class="row mb-4">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="card border">
                                     <div class="card-body text-center">
-                                        <h5 class="card-title text-primary">{{ $stats['total_public_playlists'] }}</h5>
-                                        <p class="card-text">Public Playlists</p>
+                                        <h5 class="card-title text-primary">{{ auth()->user()->playlists()->count() }}</h5>
+                                        <p class="card-text">Your Playlists</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="card border">
                                     <div class="card-body text-center">
-                                        <h5 class="card-title text-warning">{{ $stats['total_private_playlists'] }}</h5>
-                                        <p class="card-text">Private Playlists</p>
+                                        <h5 class="card-title text-success">{{ auth()->user()->following()->count() }}</h5>
+                                        <p class="card-text">Users You Follow</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="card border">
                                     <div class="card-body text-center">
-                                        <h5 class="card-title text-success">{{ $stats['total_videos'] }}</h5>
-                                        <p class="card-text">Total Videos</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card border">
-                                    <div class="card-body text-center">
-                                        <h5 class="card-title text-info">{{ $stats['total_users_with_content'] }}</h5>
-                                        <p class="card-text">Contributing Users</p>
+                                        <h5 class="card-title text-info">{{ auth()->user()->videos()->count() }}</h5>
+                                        <p class="card-text">Videos You Added</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <h5 class="mb-3">What's included in the export:</h5>
+                        <h5 class="mb-3">What's included in your export:</h5>
                         <ul class="list-group mb-4">
                             <li class="list-group-item">
                                 <i class="bi bi-check-circle text-success me-2"></i>
-                                All playlists (both public and private) with titles and descriptions
+                                All your own playlists (both public and private) with titles and descriptions
                             </li>
                             <li class="list-group-item">
                                 <i class="bi bi-check-circle text-success me-2"></i>
-                                Playlist visibility status (public/private) for each playlist
+                                Public playlists from users you follow
                             </li>
                             <li class="list-group-item">
                                 <i class="bi bi-check-circle text-success me-2"></i>
-                                Video information (title, YouTube ID, URLs)
+                                Video information (title, YouTube ID, URLs) from included playlists
                             </li>
                             <li class="list-group-item">
                                 <i class="bi bi-check-circle text-success me-2"></i>
@@ -103,7 +95,7 @@
                         <div class="text-center">
                             <a href="{{ route('export.yaml') }}" class="btn btn-primary btn-lg">
                                 <i class="bi bi-download me-2"></i>
-                                Download YAML Export
+                                Download My Data Export
                             </a>
                         </div>
 
