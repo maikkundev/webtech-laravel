@@ -23,14 +23,13 @@ Route::get('/help', static function () {
 Route::get('/search', [SearchController::class, 'index'])->name('search.index');
 Route::get('/search/results', [SearchController::class, 'search'])->name('search.results');
 
-// Public playlist routes (accessible to everyone)
-Route::get('/playlists', [PlaylistController::class, 'index'])->name('playlists.index'); // Browse all public playlists
 
 // Protected Routes - Authentication Required
 Route::middleware(['auth'])->group(function () {
     // Playlist Management Routes - SPECIFIC ROUTES FIRST (before parameterized routes)
     Route::get('/playlists/create', [PlaylistController::class, 'create'])->name('playlists.create'); // Show create form
     Route::post('/playlists', [PlaylistController::class, 'store'])->name('playlists.store'); // Store new playlist
+    Route::get('/playlists', [PlaylistController::class, 'index'])->name('playlists.index');
 
     // Video Management within Playlists (Protected)
     Route::get('/search/videos', [PlaylistController::class, 'searchVideos'])->name('search.videos'); // Search YouTube videos
