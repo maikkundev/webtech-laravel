@@ -32,7 +32,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/users/discover') }}">
-                        <i class="bi bi-card-list me-1"></i>Lists
+                        <i class="bi bi-card-list me-1"></i>Public Playlists
                     </a>
                 </li>
                 <li class="nav-item">
