@@ -14,12 +14,12 @@
                     Manage your video playlists and content with ease
                 </p>
                 <div class="d-flex gap-3 justify-content-center flex-wrap">
-                    <a href="{{ route('playlists.index') }}" class="btn btn-light fw-semibold px-4 py-2"
+                    <a href="{{ url('/users/discover') }}" class="btn btn-light fw-semibold px-4 py-2"
                         style="color: #F53003 !important;">
                         Browse Playlists
                     </a>
-                    <a href="{{ route('videos.index') }}" class="btn btn-outline-light fw-semibold px-4 py-2">
-                        View Videos
+                    <a href="{{ route('playlists.index') }}" class="btn btn-outline-light fw-semibold px-4 py-2">
+                        My Playlists
                     </a>
                 </div>
             </div>
