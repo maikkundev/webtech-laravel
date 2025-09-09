@@ -63,7 +63,8 @@
             @if ($playlist->videos->count() > 0)
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="h5 fw-semibold mb-0">Videos ({{ $playlist->videos->count() }})
+                        <h2 class="h5 fw-semibold mb-0">Videos (<span
+                                id="video-counter">{{ $playlist->videos->count() }}</span>)
                         </h2>
                     </div>
 
@@ -147,4 +148,101 @@
             @endif
         </div>
     </div>
+
+    <style>
+        #video-counter {
+            display: inline-block;
+            transition: all 0.3s ease;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .counting-animation {
+            animation: countPulse 0.2s ease-in-out;
+            color: #ff6b6b !important;
+            transform: scale(1.1);
+        }
+
+        @keyframes countPulse {
+            0% {
+                transform: scale(1);
+                color: #007bff;
+            }
+
+            50% {
+                transform: scale(1.15);
+                color: #ff6b6b;
+            }
+
+            100% {
+                transform: scale(1.1);
+                color: #ff6b6b;
+            }
+        }
+
+        .final-count {
+            animation: finalPulse 0.5s ease-in-out;
+            color: #28a745 !important;
+        }
+
+        @keyframes finalPulse {
+            0% {
+                transform: scale(1.1);
+                color: #ff6b6b;
+            }
+
+            50% {
+                transform: scale(1.3);
+                color: #ffc107;
+            }
+
+            100% {
+                transform: scale(1);
+                color: #28a745;
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoCounter = document.getElementById('video-counter');
+            if (!videoCounter) return;
+
+            const finalCount = parseInt(videoCounter.textContent);
+            if (finalCount === 0) return; // Don't animate if no videos
+
+            // Start countdown from a number higher than the actual count (at least 10)
+            const startCount = Math.max(finalCount + 100, 20);
+            let currentCount = startCount;
+
+            function updateCount() {
+                videoCounter.classList.add('counting-animation');
+                videoCounter.textContent = currentCount;
+
+                setTimeout(() => {
+                    videoCounter.classList.remove('counting-animation');
+                }, 200);
+
+                currentCount--;
+
+                if (currentCount > finalCount) {
+                    // Continue countdown with fast intervals
+                    setTimeout(updateCount, 150); // Very fast - 150ms intervals
+                } else {
+                    // Final animation when reaching the actual count
+                    setTimeout(() => {
+                        videoCounter.textContent = finalCount;
+                        videoCounter.classList.add('final-count');
+
+                        setTimeout(() => {
+                            videoCounter.classList.remove('final-count');
+                        }, 500);
+                    }, 300);
+                }
+            }
+
+            // Start the countdown after a brief delay
+            setTimeout(updateCount, 500);
+        });
+    </script>
 @endsection

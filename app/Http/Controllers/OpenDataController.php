@@ -70,15 +70,15 @@ class OpenDataController extends Controller
     {
         try {
             $user = Auth::user();
-            
+
             // Get user's own playlists
             $userPlaylists = Playlist::with(['videos', 'user'])
                 ->where('user_id', $user->id)
                 ->get();
-            
+
             // Get followed user IDs safely
             $followedUserIds = $user->following()->pluck('users.id');
-            
+
             // Get playlists from users that the current user follows (only public ones)
             $followedUsersPlaylists = collect();
             if ($followedUserIds->isNotEmpty()) {
@@ -87,7 +87,7 @@ class OpenDataController extends Controller
                     ->where('is_public', true)
                     ->get();
             }
-            
+
             // Merge both collections
             $playlists = $userPlaylists->merge($followedUsersPlaylists)
                 ->sortByDesc('created_at');

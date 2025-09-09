@@ -59,6 +59,9 @@
         </div>
     </div>
 
+    <!-- Include Video Preview Modal -->
+    @include('playlists.video-preview-modal')
+
     <script>
         // Search videos function
         async function searchVideos() {
@@ -85,14 +88,26 @@
                     <h4 class="small fw-medium mb-0 text-truncate" style="color: #1b1b18;">${video.title}</h4>
                     <p class="small text-muted mb-0">${video.channel}</p>
                 </div>
+
                 <button type="button"
-                        onclick="addVideoToPlaylist('${video.id}', '${video.title.replace(/'/g, "\\'")}')"
-                        class="btn btn-sm text-white fw-semibold px-3"
-                        style="background-color: #F53003; border-color: #F53003;"
-                        onmouseover="this.style.backgroundColor='#d42a00'"
-                        onmouseout="this.style.backgroundColor='#F53003'">
-                    Add to Playlist
-                </button>
+                            onclick="addVideoToPlaylist('${video.id}', '${video.title.replace(/'/g, "\\'")}')"
+                            class="btn btn-sm text-white fw-semibold px-3"
+                            style="background-color: #F53003; border-color: #F53003;"
+                            onmouseover="this.style.backgroundColor='#d42a00'"
+                            onmouseout="this.style.backgroundColor='#F53003'">
+                        Add to Playlist
+                    </button>
+                <div class="d-flex gap-2">
+                    <button type="button"
+                            onclick="previewVideo('${video.id}', '${video.title.replace(/'/g, "\\'")}')"
+                            class="btn btn-sm btn-outline-secondary fw-semibold px-3"
+                            style="border-color: #e3e3e0; color: #1b1b18;"
+                            onmouseover="this.style.borderColor='#F53003'; this.style.color='#F53003'"
+                            onmouseout="this.style.borderColor='#e3e3e0'; this.style.color='#1b1b18'">
+                        Preview
+                    </button>
+
+                </div>
             </div>
         `).join('');
             } catch (error) {
@@ -138,6 +153,7 @@
             document.body.appendChild(form);
             form.submit();
         }
+
 
         // Allow search on Enter key
         document.getElementById('search_query').addEventListener('keypress', function(e) {

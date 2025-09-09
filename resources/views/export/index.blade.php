@@ -17,7 +17,8 @@
                         <div class="alert alert-info" role="alert">
                             <i class="bi bi-info-circle me-2"></i>
                             <strong>About Open Data Export:</strong>
-                            This feature exports your own playlists and public playlists from users you follow in YAML format
+                            This feature exports your own playlists and public playlists from users you follow in YAML
+                            format
                             while preserving user privacy through anonymization.
                         </div>
 

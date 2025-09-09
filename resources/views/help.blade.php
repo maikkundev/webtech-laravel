@@ -72,6 +72,10 @@
                             <h5 class="fw-bold mb-2">How do I follow other users?</h5>
                             <p>Visit their profile and click the "Follow" button to see their public playlists.</p>
                         </div>
+                        <div class="mb-4">
+                            <h5 class="fw-bold mb-2">hello</h5>
+                            <p>Visit their profile and click the "Follow" button to see their public playlists.</p>
+                        </div>
                     </div>
                 </div>
             </div>

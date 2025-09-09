@@ -65,6 +65,54 @@
                 </div>
 
                 @if ($playlists->count() > 0)
+                    <!-- Sorting Controls -->
+                    <div class="card mb-4">
+                        <div class="card-body py-3">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-center">
+                                        <span class="me-2 text-muted small">
+                                            <i class="bi bi-sort-down me-1"></i>
+                                            Sort by:
+                                        </span>
+                                        <select class="form-select form-select-sm" id="sortSelect" style="width: auto;">
+                                            <option value="created_at_desc"
+                                                {{ request('sort', 'created_at_desc') === 'created_at_desc' ? 'selected' : '' }}>
+                                                📅 Newest First
+                                            </option>
+                                            <option value="created_at_asc"
+                                                {{ request('sort') === 'created_at_asc' ? 'selected' : '' }}>
+                                                📅 Oldest First
+                                            </option>
+                                            <option value="title_asc"
+                                                {{ request('sort') === 'title_asc' ? 'selected' : '' }}>
+                                                🔤 Title A-Z
+                                            </option>
+                                            <option value="title_desc"
+                                                {{ request('sort') === 'title_desc' ? 'selected' : '' }}>
+                                                🔤 Title Z-A
+                                            </option>
+                                            <option value="videos_count_desc"
+                                                {{ request('sort') === 'videos_count_desc' ? 'selected' : '' }}>
+                                                📹 Most Videos
+                                            </option>
+                                            <option value="videos_count_asc"
+                                                {{ request('sort') === 'videos_count_asc' ? 'selected' : '' }}>
+                                                📹 Least Videos
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 text-md-end">
+                                    <small class="text-muted">
+                                        Showing {{ $playlists->firstItem() ?? 0 }}-{{ $playlists->lastItem() ?? 0 }}
+                                        of {{ $playlists->total() }} results
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Results -->
                     <div class="row">
                         @foreach ($playlists as $playlist)
@@ -211,4 +259,26 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sortSelect = document.getElementById('sortSelect');
+
+            if (sortSelect) {
+                sortSelect.addEventListener('change', function() {
+                    const selectedSort = this.value;
+                    const url = new URL(window.location);
+
+                    // Update the sort parameter
+                    url.searchParams.set('sort', selectedSort);
+
+                    // Reset to page 1 when sorting changes
+                    url.searchParams.set('page', '1');
+
+                    // Navigate to the new URL
+                    window.location.href = url.toString();
+                });
+            }
+        });
+    </script>
 @endsection
