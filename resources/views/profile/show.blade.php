@@ -78,7 +78,8 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="p-3 rounded h-100 border">
                                     <h3 class="fw-medium mb-2">
-                                        <a href="{{ route('playlists.show', $playlist) }}" class="text-decoration-none">
+                                        <a href="{{ route('playlists.show', $playlist) }}" style="color: #f53003;"
+                                            class="text-decoration-none">
                                             {{ $playlist->title }}
                                         </a>
                                     </h3>
